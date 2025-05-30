@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sebastian Køster - Contact">
+    <link rel="stylesheet" href="css/contact.css">
+    <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="https://slater.app/10324/23333.css">
+    <link rel="shortcut icon" href="media/profile-pic.png" type="image/x-icon">
+    <title>Sebastian Køster | Contact</title>
+    <style>
+        /* Improved responsive layout */
+        body {
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header image improvements */
+        .header-image-container {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            margin-bottom: 20px;
+            padding: 0 20px;
+            box-sizing: border-box;
+        }
+
+        .header-image-container img {
+            border-radius: 10px;
+            width: 100%;
+            max-width: 1200px;
+            margin-top: 100px;
+            object-fit: contain;
+        }
+
+        /* Responsive layout for main blog grid */
+        .blog {
+            display: grid;
+            grid-template-columns: 15% 45% 40%;
+            grid-template-rows: auto 1fr;
+            max-height: 900px;
+            width: 100%;
+            overflow: hidden;
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0 auto;
+            max-width: 1350px;
+        }
+
+        /* Fixed marquee positioning */
+        .blog marquee {
+            grid-column: 1 / -1;
+            grid-row: 1;
+            width: 100%;
+            padding: 6px 20px;
+            margin: 0 0 20px 0;
+            box-sizing: border-box;
+        }
+
+        /* Left menu section */
+        .blog-part.is-menu {
+            grid-column: 1;
+            grid-row: 2;
+            padding: 20px;
+            overflow-y: auto;
+            height: calc(100vh - 200px);
+        }
+
+        /* Middle content section */
+        .blog-header-container {
+            grid-column: 2;
+            grid-row: 2;
+            border-right: 1px solid #94918f;
+            padding: 20px;
+            overflow-y: auto;
+            height: calc(100vh - 200px);
+        }
+
+        /* Right sidebar */
+        .blog-part.right-blog {
+            grid-column: 3;
+            grid-row: 2;
+            padding: 20px;
+            overflow-y: auto;
+            height: calc(100vh - 200px);
+        }
+
+        /* Form styling */
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group label {
+            font-weight: 500;
+            color: #000000;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            padding: 12px;
+            border: 1px solid #94918f;
+            border-radius: 4px;
+            background-color: #e9e6e4;
+            font-family: "Inter", sans-serif;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: #42be5b;
+            outline: none;
+        }
+
+        .submit-btn {
+            background-color: #42be5b;
+            color: #e9e6e4;
+            border: none;
+            padding: 14px;
+            border-radius: 4px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-family: "Inter", sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 10px;
+        }
+
+        .submit-btn:hover {
+            background-color: #d85500;
+        }
+
+        /* Contact info styling */
+        .contact-info {
+            margin-top: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .contact-item svg {
+            width: 24px;
+            height: 24px;
+            fill: #42be5b;
+        }
+
+        .contact-item a {
+            color: #000000;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contact-item a:hover {
+            color: #42be5b;
+        }
+
+        /* Social Media Grid */
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .social-item {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 20px;
+            border: 1px solid #94918f;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+
+        .social-item:hover {
+            border-color: #42be5b;
+            transform: translateY(-5px);
+        }
+
+        .social-item h3 {
+            margin: 0;
+            color: #42be5b;
+        }
+
+        .social-item p {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        .social-link {
+            margin-top: auto;
+            color: #000000;
+            text-decoration: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .social-link:hover {
+            color: #42be5b;
+        }
+
+        .social-link svg {
+            width: 16px;
+            height: 16px;
+            transition: transform 0.3s;
+        }
+
+        .social-link:hover svg {
+            transform: translateX(5px);
+        }
+
+        /* Circle accent for right section */
+        .availability-circle {
+            width: 100%;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            background-color: #42be5b;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+            color: #e9e6e4;
+            padding: 20px;
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .blog-article img.contact-image {
+            height: auto;
+            max-height: 250px;
+            object-fit: cover;
+        }
+
+        /* Tablet size adjustments */
+        @media screen and (max-width: 1030px) {
+            .blog {
+                grid-template-columns: 20% 80%;
+            }
+
+            .blog-part.right-blog {
+                display: none;
+            }
+
+            .header-image-container img {
+                margin-top: 80px;
+            }
+
+            .social-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Mobile landscape adjustments */
+        @media screen and (max-width: 768px) {
+            .blog {
+                grid-template-columns: 30% 70%;
+            }
+
+            .blog-big__title {
+                font-size: 60px;
+                letter-spacing: -2px;
+            }
+
+            .header-image-container img {
+                margin-top: 70px;
+            }
+
+            .blog-header-container,
+            .blog-part.is-menu {
+                height: calc(100vh - 150px);
+            }
+        }
+
+        /* Mobile portrait adjustments */
+        @media screen and (max-width: 560px) {
+            .blog {
+                grid-template-columns: 100%;
+                grid-template-rows: auto 1fr;
+                max-height: none;
+                height: auto;
+            }
+
+            .blog-part.is-menu {
+                display: none;
+            }
+
+            .blog-header-container {
+                grid-column: 1;
+                border-right: none;
+                height: auto;
+                max-height: none;
+                padding: 10px;
+            }
+
+            .blog-big__title {
+                font-size: 36px;
+                letter-spacing: -1px;
+            }
+
+            .header-image-container img {
+                margin-top: 60px;
+            }
+
+            .blog-article h2 {
+                font-size: 22px;
+            }
+
+            .contact-form {
+                margin-bottom: 40px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Menu Navbar -->
+    <div>
+        <div class="osmo-ui">
+            <header class="header">
+                <div class="container is--full">
+                    <nav class="nav-rowa">
+                        <div class="nav-row__right"><button role="button" data-menu-toggle="" class="menu-button">
+                                <div class="menu-button-text">
+                                    <p class="p-large">Menu</p>
+                                    <p class="p-large">Close</p>
+                                </div>
+                                <div class="icon-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="100%"
+                                        viewbox="0 0 16 16" fill="none" class="menu-button-icon">
+                                        <path
+                                            d="M7.33333 16L7.33333 -3.2055e-07L8.66667 -3.78832e-07L8.66667 16L7.33333 16Z"
+                                            fill="currentColor"></path>
+                                        <path
+                                            d="M16 8.66667L-2.62269e-07 8.66667L-3.78832e-07 7.33333L16 7.33333L16 8.66667Z"
+                                            fill="currentColor"></path>
+                                        <path
+                                            d="M6 7.33333L7.33333 7.33333L7.33333 6C7.33333 6.73637 6.73638 7.33333 6 7.33333Z"
+                                            fill="currentColor"></path>
+                                        <path
+                                            d="M10 7.33333L8.66667 7.33333L8.66667 6C8.66667 6.73638 9.26362 7.33333 10 7.33333Z"
+                                            fill="currentColor"></path>
+                                        <path
+                                            d="M6 8.66667L7.33333 8.66667L7.33333 10C7.33333 9.26362 6.73638 8.66667 6 8.66667Z"
+                                            fill="currentColor"></path>
+                                        <path
+                                            d="M10 8.66667L8.66667 8.66667L8.66667 10C8.66667 9.26362 9.26362 8.66667 10 8.66667Z"
+                                            fill="currentColor"></path>
+                                    </svg></div>
+                            </button></div>
+                    </nav>
+                </div>
+            </header>
+        </div>
+
+        <!-- Menu Roll -->
+        <section class="cloneable">
+            <div data-nav="closed" class="nav">
+                <div data-menu-toggle="" class="overlay"></div>
+                <nav class="menu">
+                    <div class="menu-bg">
+                        <div class="bg-panel first"></div>
+                        <div class="bg-panel second"></div>
+                        <div class="bg-panel"></div>
+                    </div>
+                    <div class="menu-inner">
+                        <ul class="menu-list">
+                            <li class="menu-list-item">
+                                <a href="index.html" class="menu-link w-inline-block">
+                                    <p class="menu-link-heading">Home</p>
+                                    <p class="eyebrow">01</p>
+                                    <div class="menu-link-bg"></div>
+                                </a>
+                            </li>
+                            <li class="menu-list-item">
+                                <a href="about.html" class="menu-link w-inline-block">
+                                    <p class="menu-link-heading">About</p>
+                                    <p class="eyebrow">02</p>
+                                    <div class="menu-link-bg"></div>
+                                </a>
+                            </li>
+                            <li class="menu-list-item">
+                                <a href="projects.html" class="menu-link w-inline-block">
+                                    <p class="menu-link-heading">Projects</p>
+                                    <p class="eyebrow">03</p>
+                                    <div class="menu-link-bg"></div>
+                                </a>
+                            </li>
+                            <li class="menu-list-item">
+                                <a href="#" class="menu-link w-inline-block">
+                                    <p class="menu-link-heading">Studio</p>
+                                    <p class="eyebrow">04</p>
+                                    <div class="menu-link-bg"></div>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="menu-details">
+                            <p data-menu-fade="" class="p-small">Socials</p>
+                            <div class="socials-row">
+                                <a data-menu-fade="" href="https://www.instagram.com/kosterkoster_/"
+                                    class="p-large text-link">Instagram</a>
+                                <a data-menu-fade="" href="https://www.linkedin.com/in/sebastian-køster-34802524b/"
+                                    class="p-large text-link">LinkedIn</a>
+                                <a data-menu-fade="" href="https://github.com/kosterseb"
+                                    class="p-large text-link">GitHub</a>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </section>
+    </div>
+
+    <!-- Main Area -->
+    <main>
+        <div class="blog">
+            <!-- Marquee positioned correctly -->
+            <marquee behavior="scroll" direction="left">
+                <span>Get In Touch</span>
+                <span>Let's Connect</span>
+                <span>Sebastian Aguiar Køster</span>
+                <span>Open for Collaboration</span>
+            </marquee>
+
+            <div class="blog-part is-menu">
+                <a href="index.html" class="blog-menu">
+                    home
+                    <svg fill="none" stroke="currentColor" stroke-width=".7" stroke-linecap="round"
+                        stroke-linejoin="round" class="feather feather-arrow-up-right" viewBox="0 0 24 24">
+                        <path d="M7 17L17 7M7 7h10v10" />
+                    </svg>
+                </a>
+                <a href="projects.html" class="blog-menu">
+                    projects
+                    <svg fill="none" stroke="currentColor" stroke-width=".7" stroke-linecap="round"
+                        stroke-linejoin="round" class="feather feather-arrow-up-right" viewBox="0 0 24 24">
+                        <path d="M7 17L17 7M7 7h10v10" />
+                    </svg>
+                </a>
+                <a href="about.html" class="blog-menu">
+                    about
+                    <svg fill="none" stroke="currentColor" stroke-width=".7" stroke-linecap="round"
+                        stroke-linejoin="round" class="feather feather-arrow-up-right" viewBox="0 0 24 24">
+                        <path d="M7 17L17 7M7 7h10v10" />
+                    </svg>
+                </a>
+
+                <a href="media/CV - Sebastian Køster.pdf" class="blog-menu" target="_blank">CV
+                    <svg fill="none" stroke="currentColor" stroke-width=".7" stroke-linecap="round"
+                        stroke-linejoin="round" class="feather feather-arrow-up-right" viewBox="0 0 24 24">
+                        <path d="M7 17L17 7M7 7h10v10" />
+                    </svg>
+                </a>
+                <a href="#" class="blog-menu mention"></a>
+                <a href="https://github.com/kosterseb" target="_blank" class="blog-menu subscribe">github</a>
+                <a href="https://www.instagram.com/kosterkoster_/" target="_blank"
+                    class="blog-menu subscribe">instagram</a>
+                <a href="https://www.linkedin.com/in/sebastian-køster-34802524b/" target="_blank"
+                    class="blog-menu subscribe">linkedin</a>
+                <a href="mailto: sebkos.code@gmail.com" class="blog-menu subscribe">@email</a>
+            </div>
+
+            <div class="blog-header-container">
+                <div class="blog-header">
+                    <div class="blog-article header-article">
+                        <div class="blog-big__title">Contact</div>
+                        <div class="blog-menu small-title date"></div>
+                    </div>
+                    <div class="blog-article">
+                        <img class="contact-image" src="media/transparrent.png" alt="Contact Sebastian Køster">
+                        <h2>Let's <span>Connect</span> and Create Something Amazing Together</h2>
+                        <div class="blog-detail">
+                            <span>Contact</span>
+                            <span>Get in Touch</span>
+                        </div>
+                        <p>
+                            Whether you're interested in collaborating on a web development project, have questions
+                            about my game studio,
+                            or just want to say hello - I'd love to hear from you. Feel free to reach out using the form
+                            below
+                            or through any of my social media channels.
+                        </p>
+
+                        <div class="contact-info">
+                            <h2>Direct <span>Contact</span> Information</h2>
+                            <div class="contact-item">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <path
+                                        d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+                                </svg>
+                                <a href="mailto:sebkos.code@gmail.com">sebastian.dev.cph@gmail.com</a>
+                            </div>
+                            <div class="contact-item">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <path
+                                        d="M12 12c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm6-1.8C18 6.57 15.35 4 12 4s-6 2.57-6 6.2c0 2.34 1.95 5.44 6 9.14 4.05-3.7 6-6.8 6-9.14zM12 2c4.2 0 8 3.22 8 8.2 0 3.32-2.67 7.25-8 11.8-5.33-4.55-8-8.48-8-11.8C4 5.22 7.8 2 12 2z" />
+                                </svg>
+                                <span>Copenhagen, Denmark</span>
+                            </div>
+                        </div>
+
+                        <div class="social-grid">
+                            <div class="social-item">
+                                <h3>GitHub</h3>
+                                <p>Check out my code repositories and projects</p>
+                                <a href="https://github.com/kosterseb" target="_blank" class="social-link">
+                                    Follow me on GitHub
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <path d="M5 12h14M12 5l7 7-7 7" />
+                                    </svg>
+                                </a>
+                            </div>
+                            <div class="social-item">
+                                <h3>LinkedIn</h3>
+                                <p>Connect with me professionally</p>
+                                <a href="https://www.linkedin.com/in/sebastian-køster-34802524b/" target="_blank"
+                                    class="social-link">
+                                    Connect on LinkedIn
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <path d="M5 12h14M12 5l7 7-7 7" />
+                                    </svg>
+                                </a>
+                            </div>
+                            <div class="social-item">
+                                <h3>Instagram</h3>
+                                <p>Follow my creative journey and daily inspirations</p>
+                                <a href="https://www.instagram.com/kosterkoster_/" target="_blank" class="social-link">
+                                    Follow on Instagram
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <path d="M5 12h14M12 5l7 7-7 7" />
+                                    </svg>
+                                </a>
+                            </div>
+                            <div class="social-item">
+                                <h3>Email</h3>
+                                <p>For direct inquiries and collaboration opportunities</p>
+                                <a href="mailto:sebastian.dev.cph@gmail.com" target="_top" class="social-link">
+                                    Send an Email
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <path d="M5 12h14M12 5l7 7-7 7" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="blog-part right-blog">
+                <div class="blog-right-title-container">
+                    <div class="blog-right-title">
+                        <span>Let's talk about:</span> <br>Potential collaborations
+                    </div>
+                </div>
+                <div class="blog-right">
+                    <div class="blog-right-container">
+                        <div class="blog-title-date">
+                            <div class="blog-right-page">1</div>
+                            <div class="date">Coding</div>
+                        </div>
+                        <div class="blog-right-page-title">Web Development Projects</div>
+                        <div class="blog-right-page-subtitle">Interested in collaborating on a web development project?
+                            Let's create responsive, user-friendly websites and applications together.</div>
+                    </div>
+                    <div class="blog-right-container">
+                        <div class="blog-title-date">
+                            <div class="blog-right-page">2</div>
+                            <div class="date">Gaming</div>
+                        </div>
+                        <div class="blog-right-page-title">Game Development</div>
+                        <div class="blog-right-page-subtitle">Have an idea for a game or interested in my game studio
+                            work? Let's discuss how we can bring creative gaming experiences to life.</div>
+                    </div>
+                    <div class="blog-right-container">
+                        <div class="blog-title-date">
+                            <div class="blog-right-page">3</div>
+                            <div class="date">Audio</div>
+                        </div>
+                        <div class="blog-right-page-title">Music & Sound Design</div>
+                        <div class="blog-right-page-subtitle">Need music or sound design for your project? From theater
+                            productions to game soundtracks, I can help create the perfect audio experience.</div>
+                    </div>
+                    <div class="availability-circle">
+                        <div class="circle-title">Currently Available</div>
+                        <div class="circle-subtitle">Open to freelance opportunities and collaborations on interesting
+                            projects</div>
+                        <div class="circle-footer">Let's create!</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/CustomEase.min.js"></script>
+    <script src="js/menu.js"></script>
+    <script>
+        // Form submission handling
+        document.querySelector('.contact-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            // Here you would typically add your form submission logic
+            // For now, let's just show an alert
+            alert('Thanks for your message! I\'ll get back to you soon.');
+            this.reset();
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sebastian Køster Portfolio">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="https://slater.app/10324/23333.css">
+    <link rel="shortcut icon" href="media/profile-pic.png" type="image/x-icon">
+    <title>Sebastian Køster | Portfolio</title>
+    
+</head>
+
+<body>
+    <style>
+        /* Fix space above marquee/header */
+.header-image-container {
+    margin: 0 0 10px 0; /* Remove the top margin */
+    padding-top: 60px; /* Add padding to account for fixed header */
+}
+
+/* Fix the marquee positioning */
+.blog marquee {
+    margin: 0 0 10px 0; /* Reduce margin */
+}
+
+/* Fix header position */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    background-color: transparent;
+    height: 60px; /* Set a fixed height */
+    display: flex;
+    align-items: center;
+}
+
+/* Fix blog container spacing */
+.blog {
+    margin-top: 0;
+    padding-top: 0;
+}
+
+/* Fix spacing in blog articles */
+.blog-article {
+    padding: 0 0 10px 0; /* Reduce bottom padding */
+    
+}
+
+/* Adjust blog header container height for better scrolling */
+.blog-header-container, 
+.blog-part.right-blog,
+.blog-part.is-menu {
+    height: calc(100vh - 160px); /* Adjust calculation to fix scroll area */
+    max-height: none; /* Remove max-height restriction */
+}
+
+/* Fix menu button text visibility */
+.menu-button-text {
+    position: relative !important;
+    overflow: hidden !important;
+    height: 1.125em !important;
+}
+
+.menu-button-text p {
+    position: relative !important;
+    transition: transform 0.7s cubic-bezier(0.65, 0.01, 0.05, 0.99) !important;
+}
+
+/* Ensure both Menu and Close text are positioned correctly */
+.menu-button-text p:first-child {
+    transform: translateY(0%) !important;
+}
+
+.menu-button-text p:last-child {
+    transform: translateY(100%) !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+}
+
+/* When menu is open, show Close text */
+[data-nav="open"] .menu-button-text p:first-child {
+    transform: translateY(-100%) !important;
+}
+
+[data-nav="open"] .menu-button-text p:last-child {
+    transform: translateY(0%) !important;
+}
+
+/* Backup z-index fix */
+.menu-button {
+    z-index: 300 !important;
+    position: relative !important;
+}
+
+.header {
+    z-index: 250 !important;
+}
+
+.nav {
+    z-index: 200 !important;
+}
+
+/* Mobile responsiveness fixes */
+@media screen and (max-width: 768px) {
+    .header-image-container {
+        display: none;
+        margin: 0; /* Remove all margins */
+    }
+    
+    .blog {
+        padding-top: 60px; /* Add padding to account for fixed header */
+    }
+    
+    .blog-header-container {
+        height: auto; /* Allow content to flow */
+        overflow-y: visible; /* Don't restrict overflow */
+    }
+    
+    /* Ensure marquee is positioned correctly */
+    .blog marquee {
+        margin: 0 0 10px 0;
+    }
+}
+
+/* Further mobile adjustments */
+@media screen and (max-width: 560px) {
+    .blog {
+        padding-top: 60px; /* Maintain padding for header */
+    }
+    
+    .blog-header-container {
+        padding: 10px;
+        margin-top: 0;
+    }
+    
+    .blog-article {
+        padding: 0 0 15px 0; /* Further reduce padding */
+    }
+    
+    /* Fix spacing in articles */
+    .blog-article h2 {
+        margin: 6px 0 6px; /* Reduce margins */
+    }
+    
+    .blog-article p {
+        margin: 10px 0; /* Reduce margins */
+    }
+    
+    /* Remove any excess space from blog container */
+    .blog-header-container > * {
+        min-height: auto; /* Allow natural height */
+    }
+}
+    </style>
+    <!-- Menu Navbar -->
+    <div>
+        <div class="osmo-ui">
+            <header class="header">
+                <div class="container is--full">
+                    <nav class="nav-rowa">
+                        <div class="nav-row__right"><button role="button" data-menu-toggle="" class="menu-button">
+                                <div class="menu-button-text">
+                                    <p class="p-large">Menu</p>
+                                    <p class="p-large">Close</p>
+                                </div>
+                                <div class="icon-wrap"><svg xmlns="http://www.w3.org/2000/svg" width="100%"
+                                        viewbox="0 0 16 16" fill="none" class="menu-button-icon">
+                                        <path
+                                            d="M7.33333 16L7.33333 -3.2055e-07L8.66667 -3.78832e-07L8.66667 16L7.33333 16Z"
+                                            fill="currentColor"></path>
+                                        <path
+                                            d="M16 8.66667L-2.62269e-07 8.66667L-3.78832e-07 7.33333L16 7.33333L16 8.66667Z"
+                                            fill="currentColor"></path>
+                                        <path
+                                            d="M6 7.33333L7.33333 7.33333L7.33333 6C7.33333 6.73637 6.73638 7.33333 6 7.33333Z"
+                                            fill="currentColor"></path>
+                                        <path
+                                            d="M10 7.33333L8.66667 7.33333L8.66667 6C8.66667 6.73638 9.26362 7.33333 10 7.33333Z"
+                                            fill="currentColor"></path>
+                                        <path
+                                            d="M6 8.66667L7.33333 8.66667L7.33333 10C7.33333 9.26362 6.73638 8.66667 6 8.66667Z"
+                                            fill="currentColor"></path>
+                                        <path
+                                            d="M10 8.66667L8.66667 8.66667L8.66667 10C8.66667 9.26362 9.26362 8.66667 10 8.66667Z"
+                                            fill="currentColor"></path>
+                                    </svg></div>
+                            </button></div>
+                    </nav>
+                </div>
+            </header>
+        </div>
+
+        <!-- Menu Roll -->
+        <section class="cloneable">
+            <div data-nav="closed" class="nav">
+                <div data-menu-toggle="" class="overlay"></div>
+                <nav class="menu">
+                    <div class="menu-bg">
+                        <div class="bg-panel first"></div>
+                        <div class="bg-panel second"></div>
+                        <div class="bg-panel"></div>
+                    </div>
+                    <div class="menu-inner">
+                        <ul class="menu-list">
+                            <li class="menu-list-item">
+                                <a href="about.html" class="menu-link w-inline-block">
+                                    <p class="menu-link-heading">About</p>
+                                    <p class="eyebrow">01</p>
+                                    <div class="menu-link-bg"></div>
+                                </a>
+                            </li>
+                            <li class="menu-list-item">
+                                <a href="projects.html" class="menu-link w-inline-block">
+                                    <p class="menu-link-heading">Projects</p>
+                                    <p class="eyebrow">02</p>
+                                    <div class="menu-link-bg"></div>
+                                </a>
+                            </li>
+                            <li class="menu-list-item">
+                                <a href="#" class="menu-link w-inline-block">
+                                    <p class="menu-link-heading">Studio</p>
+                                    <p class="eyebrow">03</p>
+                                    <div class="menu-link-bg"></div>
+                                </a>
+                            </li>
+                            <li class="menu-list-item">
+                                <a href="contact.html" class="menu-link w-inline-block">
+                                    <p class="menu-link-heading">Contact</p>
+                                    <p class="eyebrow">04</p>
+                                    <div class="menu-link-bg"></div>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="menu-details">
+                            <p data-menu-fade="" class="p-small">Socials</p>
+                            <div class="socials-row">
+                                <a data-menu-fade="" href="https://www.instagram.com/kosterkoster_/"
+                                    class="p-large text-link">Instagram</a>
+                                <a data-menu-fade="" href="https://www.linkedin.com/in/sebastian-køster-34802524b/"
+                                    class="p-large text-link">LinkedIn</a>
+                                <a data-menu-fade="" href="https://github.com/kosterseb"
+                                    class="p-large text-link">GitHub</a>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </section>
+    </div>
+
+    <!-- Header image -->
+    <div class="header-image-container">
+        <img src="media/headerimg.png" alt="Sebastian Køster header image">
+    </div>
+
+    <!-- Main Area -->
+    <main>
+        <div class="blog">
+            <!-- Marquee positioned -->
+            <marquee behavior="scroll" direction="left">
+                <span>Welcome To My Portfolio</span>
+                <span>Web Design</span>
+                <span>Web Development</span>
+                <span>Game Development</span>
+                <span>HTML5, CSS3, JS</span>
+                <span>Sebastian Aguiar Køster</span>
+                <span>Be Curious, Explore, Create</span>
+            </marquee>
+
+            <div class="blog-part is-menu">
+                <a href="projects.html" class="blog-menu">
+                    projects
+                    <svg fill="none" stroke="currentColor" stroke-width=".7" stroke-linecap="round"
+                        stroke-linejoin="round" class="feather feather-arrow-up-right" viewBox="0 0 24 24">
+                        <path d="M7 17L17 7M7 7h10v10" />
+                    </svg>
+                </a>
+                <a href="#" class="blog-menu">
+                    contact
+                    <svg fill="none" stroke="currentColor" stroke-width=".7" stroke-linecap="round"
+                        stroke-linejoin="round" class="feather feather-arrow-up-right" viewBox="0 0 24 24">
+                        <path d="M7 17L17 7M7 7h10v10" />
+                    </svg>
+                </a>
+                <a href="about.html" class="blog-menu">
+                    about
+                    <svg fill="none" stroke="currentColor" stroke-width=".7" stroke-linecap="round"
+                        stroke-linejoin="round" class="feather feather-arrow-up-right" viewBox="0 0 24 24">
+                        <path d="M7 17L17 7M7 7h10v10" />
+                    </svg>
+                </a>
+                
+                <a href="media/CV - Sebastian Køster.pdf" class="blog-menu" target="_blank">CV
+                    <svg fill="none" stroke="currentColor" stroke-width=".7" stroke-linecap="round"
+                        stroke-linejoin="round" class="feather feather-arrow-up-right" viewBox="0 0 24 24">
+                        <path d="M7 17L17 7M7 7h10v10" />
+                    </svg>
+                </a>
+                <a href="#" class="blog-menu mention"></a>
+                <a href="https://github.com/kosterseb" target="_blank" class="blog-menu subscribe">github</a>
+                <a href="https://www.instagram.com/kosterkoster_/" target="_blank"
+                    class="blog-menu subscribe">instagram</a>
+                <a href="https://www.linkedin.com/in/sebastian-køster-34802524b/" target="_blank"
+                    class="blog-menu subscribe">linkedin</a>
+                <a href="mailto: sebkos.code@gmail.com" class="blog-menu subscribe">@email</a>
+            </div>
+
+            <div class="blog-header-container">
+                <div class="blog-header">
+                    <div class="blog-article header-article">
+                        <div class="blog-big__title">Hello!</div>
+                        <div class="blog-menu small-title date"></div>
+                    </div>
+                    <div class="blog-article">
+                        <img src="media/profile-pic.png" alt="Sebastian Køster profile">
+                        <h2>Hi there! <span>Welcome</span> to my portfolio.</h2>
+                        <div class="blog-detail">
+                            <span>Portfolio</span>
+                            <span>Introduction</span>
+                        </div>
+                        <p>Welcome to my portfolio! Do have a look around to see what I'm all about!
+                            I am a web developer student at RTS in Denmark, with a past in the food industry. I have a
+                            passion for game development, music production and a bunch of other stuff!
+                        </p>
+                        <a href="about.html">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" class="feather feather-corner-down-right"
+                                viewBox="0 0 24 24">
+                                <path d="M15 10l5 5-5 5" />
+                                <path d="M4 4v7a4 4 0 004 4h12" />
+                            </svg>
+                            more
+                        </a>
+                    </div>
+                </div>
+
+                <div class="blog-header">
+                    <div class="blog-article header-article">
+                        <div class="blog-big__title">CODE</div>
+                        <div class="blog-menu small-title date">29.03.2025</div>
+                    </div>
+                    <div class="blog-article">
+                        <img src="media/cyco.png" alt="CYCO Project">
+                        <h2>CYCO: <span>Project</span> Bicycle and coffee community website.</h2>
+                        <div class="blog-detail">
+                            <span>School/Group Project:</span>
+                            <span>5 min read</span>
+                        </div>
+                        <p>I was the project-leader on this web application with a team of 4, we had a clear goal in
+                            mind: a bicycle and coffee community in Copenhagen. Minimalistic design and easy access.
+                        </p>
+                        <a href="projects.html">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" class="feather feather-corner-down-right"
+                                viewBox="0 0 24 24">
+                                <path d="M15 10l5 5-5 5" />
+                                <path d="M4 4v7a4 4 0 004 4h12" />
+                            </svg>
+                            more
+                        </a>
+                    </div>
+                </div>
+
+                <div class="blog-header">
+                    <div class="blog-article header-article">
+                        <div class="blog-big__title">MUSIC</div>
+                        <div class="blog-menu small-title date">01.04.2025</div>
+                    </div>
+                    <div class="blog-article">
+                        <img src="media/lukkede.avif" alt="NO EXIT Theater">
+                        <h2>NO EXIT <span>Theater</span> Music Score</h2>
+                        <div class="blog-detail">
+                            <span>Music Production</span>
+                            <span>Sound Design</span>
+                        </div>
+                        <p>I worked for 4 months, creating a soundscape for a play originally written by
+                            Jean Paul Sartre. The play is about 3 people trapped in a room, and the
+                            soundscape is a mix of ambient sounds, and music.
+                        </p>
+                        <a href="projects.html">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" class="feather feather-corner-down-right"
+                                viewBox="0 0 24 24">
+                                <path d="M15 10l5 5-5 5" />
+                                <path d="M4 4v7a4 4 0 004 4h12" />
+                            </svg>
+                            more
+                        </a>
+                    </div>
+                </div>
+
+                <div class="blog-header">
+                    <div class="blog-article header-article">
+                        <div class="blog-big__title">FOOD</div>
+                        <div class="blog-menu small-title date">05.01.2025</div>
+                    </div>
+                    <div class="blog-article">
+                        <img src="media/slottet.webp" alt="Frederiksborg Castle">
+                        <h2>Culinary World: <span>Gastronomy</span> My Journey in the world of food.</h2>
+                        <div class="blog-detail">
+                            <span>Past Career</span>
+                            <span>Food</span>
+                        </div>
+                        <p>I worked for 9 years in the restaurant business. Mostly with the field of Michelin
+                            kitchens, farm to table and organic foods. I was lastly the head chef at Frederiksborg
+                            Castle in northern Zealand, Denmark.
+                        </p>
+                        <a href="projects.html">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" class="feather feather-corner-down-right"
+                                viewBox="0 0 24 24">
+                                <path d="M15 10l5 5-5 5" />
+                                <path d="M4 4v7a4 4 0 004 4h12" />
+                            </svg>
+                            more
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="blog-part right-blog">
+                <div class="blog-right-title-container">
+                    <div class="blog-right-title">
+                        <span>About me:</span> <br>Quick facts/introduction
+                    </div>
+                </div>
+                <div class="blog-right">
+                    <div class="blog-right-container">
+                        <div class="blog-title-date">
+                            <div class="blog-right-page">1</div>
+                            <div class="date">Coding</div>
+                        </div>
+                        <div class="blog-right-page-title">Web Development</div>
+                        <div class="blog-right-page-subtitle">Currently studying web development at RTS, Roskilde,
+                            Denmark. <br>
+                            While the main focus is on HTML5, JavaScript, CSS3, I'm working on different projects in
+                            other frameworks.
+                        </div>
+                    </div>
+                    <div class="blog-right-container">
+                        <div class="blog-title-date">
+                            <div class="blog-right-page">2</div>
+                            <div class="date">Coding</div>
+                        </div>
+                        <div class="blog-right-page-title">Game Development</div>
+                        <div class="blog-right-page-subtitle">Actively working on building a Game Studio with my
+                            partner, doing the programming in Unity and visuals.</div>
+                    </div>
+                    <div class="blog-right-container">
+                        <div class="blog-title-date">
+                            <div class="blog-right-page">3</div>
+                            <div class="date">Music</div>
+                        </div>
+                        <div class="blog-right-page-title">Music Production</div>
+                        <div class="blog-right-page-subtitle">I'm working on different music projects and productions.
+                            Anything from my own music to theater, film and other people's music productions.</div>
+                    </div>
+                    <div class="blog-right-container">
+                        <div class="blog-title-date">
+                            <div class="blog-right-page">4</div>
+                            <div class="date">Food</div>
+                        </div>
+                        <div class="blog-right-page-title">Gastronomy</div>
+                        <div class="blog-right-page-subtitle">Though I'm retired, I still have learned so much about
+                            managing and building brand for the right reasons in the food industry.</div>
+                    </div>
+                    <div class="blog-right-container">
+                        <div class="blog-title-date">
+                            <div class="blog-right-page">5</div>
+                            <div class="date">Personal</div>
+                        </div>
+                        <div class="blog-right-page-title">Passions</div>
+                        <div class="blog-right-page-subtitle">I use most of my time with my partner - with friends and love cooking, music and other social activities.</div>
+                    </div>
+                    <div class="blog-right-container">
+                        <div class="blog-title-date">
+                            <div class="blog-right-page">6</div>
+                            <div class="date">Informative</div>
+                        </div>
+                        <div class="blog-right-page-title">Take a Look around!</div>
+                        <div class="blog-right-page-subtitle">I created this portfolio for you to explore it, so go check out some of my Projects where I have games you can play and designs I've made!
+                            <br>
+                            <a href="projects.html" class="blog-right-page-subtitle">Click here to see my projects!</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/CustomEase.min.js"></script>
+    <script src="js/menu.js"></script>
+    <script>
+// Simple menu text animation
+document.addEventListener("DOMContentLoaded", function() {
+    setTimeout(() => {
+        const navWrap = document.querySelector(".nav");
+        const menuButtonTexts = document.querySelectorAll(".menu-button-text p");
+        
+        if (navWrap && menuButtonTexts.length === 2) {
+            // Just make sure initial state is correct
+            menuButtonTexts[0].style.transform = 'translateY(0)';     // Menu visible
+            menuButtonTexts[1].style.transform = 'translateY(100%)';  // Close hidden
+            
+            console.log("Simple menu text animation ready!");
+        }
+    }, 100);
+});
+</script>
+</body>
+
+</html>

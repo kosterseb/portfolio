@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Manage your Galaxy Slots Resort account and view your stats">
+    <script src="js/landingpage.js" defer></script>
+    <link rel="stylesheet" type="text/css" href="css/landingpage.css">
+    <link rel="icon" type="image/x-icon" href="media/galaxy.png">
+    <title>My Account - Galaxy Slots Resort</title>
+</head>
+
+<body>
+    <!-- Video Background -->
+    <div class="bg-video-container">
+        <video class="bg-video" autoplay loop muted>
+            <source src="https://videos.pexels.com/video-files/10882975/10882975-uhd_2560_1440_30fps.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="bg-overlay"></div>
+    </div>
+    
+    <!-- Star background effect -->
+    <div class="stars" id="stars"></div>
+    
+    <!-- Header with Navigation -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <img src="media/galaxy.png" alt="Galaxy Slots Resort Logo">
+            </div>
+            <button class="menu-toggle" id="menuToggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="spillemaskine.html">Play Now</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="#" class="under-construction">Shop</a></li>
+                </ul>
+                
+            </nav>
+            <!-- This overlay element is missing -->
+            <div id="menuOverlay" class="menu-overlay"></div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Account Section -->
+        <section class="features">
+            <div class="container">
+                <div class="row">
+                    <div class="col-third">
+                        <div class="card">
+                            <div style="text-align: center; margin-bottom: 20px;">
+                                <img id="userIcon" src="" alt="User Icon" style="width: 120px; height: 120px; border-radius: 50%; border: 3px solid #4ecca3; padding: 5px; background-color: rgba(16, 26, 87, 0.7);">
+                            </div>
+                            <h2 id="username" style="text-align: center;">Loading...</h2>
+                            <div style="text-align: center; margin-bottom: 20px;">
+                                <span class="btn btn-secondary" style="cursor: default;">
+                                    <span id="userCredits">0</span> Credits
+                                </span>
+                            </div>
+                            <div style="padding: 10px 0; border-top: 1px solid rgba(255, 255, 255, 0.1);">
+                                <p><strong>Favorite Animal:</strong> <span id="favoriteAnimal">Loading...</span></p>
+                                <p><strong>Birth Year:</strong> <span id="birthYear">Loading...</span></p>
+                                <p><strong>Space Explorer Since:</strong> <span id="joinDate">Loading...</span></p>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <h3>Account Actions</h3>
+                            <div style="display: flex; flex-direction: column; gap: 10px;">
+                                <button class="btn" id="resetCreditsBtn">Reset Credits to 1000</button>
+                                <button class="btn btn-secondary" id="logoutBtn">Log Out</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-half">
+                        <div class="card">
+                            <h2>Gameplay Stats</h2>
+                            <div id="statsPlaceholder">
+                                <p>Start playing to generate your stats!</p>
+                                <div style="text-align: center; margin: 30px 0;">
+                                    <a href="spillemaskine.html" class="btn">Play Now</a>
+                                </div>
+                            </div>
+                            <div id="playerStats" style="display: none;">
+                                <div class="row" style="margin-bottom: 30px;">
+                                    <div class="col" style="text-align: center;">
+                                        <h3 id="gamesPlayed">0</h3>
+                                        <p>Games Played</p>
+                                    </div>
+                                    <div class="col" style="text-align: center;">
+                                        <h3 id="biggestWin">0</h3>
+                                        <p>Biggest Win</p>
+                                    </div>
+                                    <div class="col" style="text-align: center;">
+                                        <h3 id="totalWins">0</h3>
+                                        <p>Total Wins</p>
+                                    </div>
+                                </div>
+                                <h3>Recent Activity</h3>
+                                <div id="recentActivity" style="max-height: 200px; overflow-y: auto;">
+                                    <p>No recent activity to display.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card">
+                            <h2>Edit Profile</h2>
+                            <form id="editProfileForm">
+                                <div class="form-group">
+                                    <label for="editUsername">Username</label>
+                                    <input type="text" class="form-control" id="editUsername">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="editFavoriteAnimal">Favorite Animal</label>
+                                    <input type="text" class="form-control" id="editFavoriteAnimal">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label>Change your player icon</label>
+                                    <div class="icon-selection" style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px;">
+                                        <label style="cursor: pointer; border: 2px solid transparent; border-radius: 10px; padding: 5px; transition: all 0.3s ease;">
+                                            <input type="radio" name="editPlayerIcon" value="astronaut" style="display: none;">
+                                            <img src="media/astronaut.png" alt="Astronaut" style="width: 60px; height: 60px;">
+                                        </label>
+                                        <label style="cursor: pointer; border: 2px solid transparent; border-radius: 10px; padding: 5px; transition: all 0.3s ease;">
+                                            <input type="radio" name="editPlayerIcon" value="planet" style="display: none;">
+                                            <img src="media/planet.png" alt="Planet" style="width: 60px; height: 60px;">
+                                        </label>
+                                        <label style="cursor: pointer; border: 2px solid transparent; border-radius: 10px; padding: 5px; transition: all 0.3s ease;">
+                                            <input type="radio" name="editPlayerIcon" value="star" style="display: none;">
+                                            <img src="media/star.png" alt="Star" style="width: 60px; height: 60px;">
+                                        </label>
+                                        <label style="cursor: pointer; border: 2px solid transparent; border-radius: 10px; padding: 5px; transition: all 0.3s ease;">
+                                            <input type="radio" name="editPlayerIcon" value="ufo" style="display: none;">
+                                            <img src="media/ufo.png" alt="UFO" style="width: 60px; height: 60px;">
+                                        </label>
+                                        <label style="cursor: pointer; border: 2px solid transparent; border-radius: 10px; padding: 5px; transition: all 0.3s ease;">
+                                            <input type="radio" name="editPlayerIcon" value="meteor" style="display: none;">
+                                            <img src="media/meteor.png" alt="Meteor" style="width: 60px; height: 60px;">
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group" style="text-align: center; margin-top: 20px;">
+                                    <button type="submit" class="btn">Save Changes</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Galaxy Slots Resort. All rights reserved.</p>
+            <p>Must be 18+ to play. Please gamble responsibly.</p>
+        </div>
+    </footer>

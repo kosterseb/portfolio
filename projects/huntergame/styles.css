@@ -1,0 +1,90 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    max-width: 800px;
+    max-height: 800px;
+}
+
+h1 {
+    margin-left: 20%;
+    margin-top: 45%;
+}
+
+h2 {
+    margin-left: 5%;
+    margin-top: 10%;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-image: url(https://static.vecteezy.com/system/resources/previews/014/572/097/non_2x/background-of-green-grass-field-cartoon-drawing-free-vector.jpg);
+    background-position: center;
+    background-size: cover;
+    max-width: 800px;
+}
+
+.info {
+    background-color: bisque;
+    background-position: center;
+    background-size: 200px 200px;
+    border-radius: 8px;
+    width: 250px;
+    height: 150px;
+    margin-left: 100px;
+}
+
+#game-board {
+    width: 800px;
+    height: 200px;
+    position: relative;
+    
+}
+
+#blueSquare {
+    text-align:right;
+    width: 100px;
+    height: 100px;
+    
+    position: absolute;
+    border-radius: 10px;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-image: url(nomad.png);
+    background-position: center;
+    background-size: cover;
+}
+
+#redSquare {
+    width: 100px;
+    height: 100px;
+    
+    position: absolute;
+    top: 90%;
+    left: 50%;
+    border-radius: 10px;
+    transform: translate(-50%, -50%);
+    background-image: url(deer.png);
+    background-position: center;
+    background-size: cover;
+}
+
+.according {
+    width: 300px;
+    margin-left: 24%;
+    margin-bottom: 10%;
+}
+
+.according--toggle-button:hover {
+background-color: #3498db;
+}
+
+.according-content {
+    overflow: hidden;
+    height: 0;
+    background-color: red;
+    padding: 0 5px;
+    font-size: 25px;
+    
+}

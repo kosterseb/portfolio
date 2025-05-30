@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <link rel="shortcut icon" href="nomad.png" type="image/x-icon">
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/Flip.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/Observer.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollToPlugin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/Draggable.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/MotionPathPlugin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/EaselPlugin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/PixiPlugin.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/TextPlugin.min.js"></script>
+    <!-- RoughEase, ExpoScaleEase and SlowMo are all included in the EasePack file -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/EasePack.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/CustomEase.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/MotionPathPlugin.min.js"></script>
+    <title>The Hunt - Interact 2 / Lektion 3</title>
+</head>
+
+<body>
+    <header>
+        <div class="info">
+        <h1>The Hunt</h1>
+        <h2><i>"Get deer = Food"</i></h2>
+        <br>
+        <p>(by SK, for JS practice)</p>
+    </div>
+
+<section class="according">
+    <button class="reset-Button according--toggle-button" id="toggleBtn">Game Rules</button>
+    <div id="foldBox" class="according-content">
+        <p>1. You are hunter.</p>
+        <br>
+        <p>2. Hunt deer with</p>
+        <p>keyboard keys</p>
+        <br>
+        <p>3. Hit deer 20 times</p>
+        br
+        <p>4. Deer die</p>
+        <br>
+        <p>5. You win</p>
+        <br>
+        <p>5. ....GO!</p>
+        
+    </section>
+
+</div>
+
+    </header>
+    <main id="game-board">
+
+        <div>
+            <div id="blueSquare"><h1 id="points">0</h1></div>
+            <div id="redSquare"></div>
+        </div>
+
+    </main>
+    <footer>
+    </footer>
+    <script src="scripts.js"></script>
+    <script src="foldbox.js"></script>
+</body>
+
+</html>

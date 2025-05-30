@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Browse all shared recipes in our delicious recipe collection!">
+    <meta name="keywords" content="
+    Blog, 
+    Bloggen, 
+    Food, 
+    Mad, 
+    Opskrifter 
+    homemade 
+    recipes
+    DIY cooking
+    cook at home
+    recipe collection
+    cookbook
+    food inspiration">
+    <meta name="author" content="Sebastian Køster">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <link rel="icon" type="image/x-icon" href="media/cooking.png">
+    <title>Recipe Food Blog - Browse All Recipes</title>
+</head>
+
+<body>
+    <header>
+       <!-- Nav header -->
+       <h1>RECIPE - BLOG</h1>
+
+    </header>
+
+    <main>
+        <nav>
+            <ul>
+                <li><a href="index.html">Write Recipe</a></li>
+            </ul>
+        </nav>
+
+        <section>
+            <div class="container">
+                <h1>Recipe Collection</h1>
+                
+                <div class="recipe-filters">
+                    <div class="search-container">
+                        <input type="text" id="search-input" placeholder="Search recipes...">
+                    </div>
+                    <div class="filter-container">
+                        <select id="filter-select">
+                            <option value="all">All Recipes</option>
+                            <option value="cooked">Cooked Recipes</option>
+                            <option value="uncooked">Uncooked Recipes</option>
+                        </select>
+                        <select id="sort-select">
+                            <option value="newest">Newest First</option>
+                            <option value="oldest">Oldest First</option>
+                            <option value="az">A-Z</option>
+                            <option value="za">Z-A</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="recipes-count">
+                    <p>Showing <span id="recipe-count">0</span> recipes</p>
+                </div>
+                
+                <ul id="recipe-list" class="recipe-collection"></ul>
+                
+                <div id="empty-state" class="empty-state">
+                    <p>No recipes found. Add some recipes from the home page!</p>
+                    <button><a href="index.html" class="button">Create Recipe</a></button>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+    </footer>
+    
+    <script src="js/savedrecipes.js" defer></script>
+</body>
+
+</html>

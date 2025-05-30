@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Experience the thrills of intergalactic gambling at Galaxy Slots Resort!">
+    <script src="js/scripts.js" defer></script>
+    
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <link rel="stylesheet" type="text/css" href="css/sounds.css">
+
+    <link rel="icon" type="image/x-icon" href="media/galaxy.png">
+    <title>Galaxy Slots Resort - Game</title>
+</head>
+
+<body>
+
+<!-- Video Background -->
+<div class="bg-video-container">
+    <video class="bg-video" autoplay loop muted>
+        <source src="https://videos.pexels.com/video-files/10882975/10882975-uhd_2560_1440_30fps.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <div class="bg-overlay"></div>
+</div>
+
+<div class="bg-video-container">
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <img src="media/galaxy.png" alt="Galaxy Slots Resort Logo">
+            </div>
+            <button class="menu-toggle" id="menuToggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="spillemaskine.html">Play Now</a></li>
+                    <li><a href="account.html">Account</a></li>
+                    <li><a href="#" class="under-construction">Shop</a></li>
+                </ul>
+            </nav>
+            <!-- This overlay element is missing -->
+            <div id="menuOverlay" class="menu-overlay"></div>
+        </div>
+        </nav>
+    </header>
+    <main>
+        <h1>Galaxy Slots Resort!</h1>
+        
+        <!-- Slotmachine -->
+        <section>
+            <div id="slotmachine">
+                <div id="choice">
+                    <button id="spinButton" onclick="spin()">
+                        SPIN
+                    </button>
+
+                    <div id="slot1" class="slot"></div>
+                    <div id="slot2" class="slot"></div>
+                    <div id="slot3" class="slot"></div>
+
+                    <div id="holdButtons">
+                        <button id="holdBtn1" class="hold-button" onclick="toggleHold(1)">HOLD 1</button>
+                        <button id="holdBtn2" class="hold-button" onclick="toggleHold(2)">HOLD 2</button>
+                        <button id="holdBtn3" class="hold-button" onclick="toggleHold(3)">HOLD 3</button>
+                    </div>
+                </div>
+                <div id="result">
+                    <p id="message"></p>
+                    <p id="points"></p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Score Section -->
+
+        <section>
+            <h2>Score</h2>
+            <div>
+                <h2>
+                    <p>Amount:</p>
+                    <p id="credit"></p>
+                </h2>
+            </div>
+        </section>
+        
+        <!-- Bank Section -->
+        <section>
+            <h2>Your Bank</h2>
+            <div>
+                <h2>
+                    <p>Balance:</p>
+                    <p id="bankBalance">${bankBalance}</p>
+                </h2>
+                <div class="bank-buttons">
+                    <button id="depositButton" onclick="deposit()">DEPOSIT</button>
+                    <button id="withdrawButton" onclick="withdraw()">WITHDRAW</button>
+                </div>
+            </div>
+        </section>
+        <!-- Winstreak -->
+        <section>
+            <div>
+                <p>Win Streak: <span id="winStreak">${winStreak}</span></p>
+            <p>Max Streak: <span id="maxWinStreak">${maxWinStreak}</span></p>
+            </div>
+        </section>
+        <!-- History Section -->
+        <section>
+            <h2>History:</h2>
+            <div id="history">
+                <p id="history1"></p>
+                <p id="history2"></p>
+                <p id="history3"></p>
+                <p id="history4"></p>
+                <p id="history5"></p>
+                <p id="history6"></p>
+                <p id="history7"></p>
+                <p id="history8"></p>
+                <p id="history9"></p>
+                <p id="history10"></p>
+            </div>
+        </section>
+        
+        <!-- Rules and Prizes Section -->
+        <section>
+            <h2>Galaxy Slots Guide</h2>
+            
+            <!-- Rules Container -->
+            <div class="rules-container">
+                <h2>Rules!</h2>
+                <h3>You start with withdrawing your bankcredits!</h3>
+                <h3>Every spin-pull costs 10 credits!</h3>
+                <h3>Match 3 symbols to win credits!</h3>
+                <h3>Every hold on slots costs 15 credits!</h3>
+                <h3>You can hold a max of 2 slots at a time!</h3>
+                <h3>For every winstreak you get bonus credits!</h3>
+                <h3>You can bet your credits each spin, to double your credit!</h3>
+                <h3>There are a winstreak bonus!</h3>
+                <h3>For every 30 spin, the bank will pay a interest!</h3>
+            </div>
+            
+            <!-- Prizes Container -->
+            <div class="prizes-container">
+                <h2>Combo List:</h2>
+                <!-- list of combos -->
+                <p><img src="/Spillemaskine opgave/opgave/media/astronaut.png" alt="" width="75px">x 3 = 100</p>
+                <p><img src="/Spillemaskine opgave/opgave/media/galaxy (1).png" alt="" width="75px">x 3 = 200</p>
+                <p><img src="/Spillemaskine opgave/opgave/media/meteor.png" alt="" width="75px">x 3 = 300</p>
+                <p><img src="/Spillemaskine opgave/opgave/media/planet.png" alt="" width="75px">x 3 = 400</p>
+                <p><img src="/Spillemaskine opgave/opgave/media/star.png" alt="" width="75px">x 3 = 500</p>
+                <p><img src="/Spillemaskine opgave/opgave/media/space-shuttle.png" alt="" width="75px">x 3 = 600</p>
+                <p><img src="/Spillemaskine opgave/opgave/media/ufo.png" alt="" width="75px">x 3 = 700</p>
+                <p><img src="/Spillemaskine opgave/opgave/media/galaxy.png" alt="" width="75px">x 3 = 800</p>
+                <p><img src="/Spillemaskine opgave/opgave/media/space-ship.png" alt="" width="75px">x 3 = 900</p>
+                <p><img src="/Spillemaskine opgave/opgave/media/logo.png" alt="" width="75px">x 3 = 1000</p>
+
+                <h2>Special Combos!</h2>
+                <!-- special combos -->
+                <h3>Astronaut in Space!</h3>
+                <p><img src="/Spillemaskine opgave/opgave/media/galaxy.png" alt="" width="75px">
+                    <img src="/Spillemaskine opgave/opgave/media/astronaut.png" alt="" width="75px">
+                    <img src="/Spillemaskine opgave/opgave/media/galaxy.png" alt="" width="75px"> = 1500
+                </p>
+                <h3>Dark Galaxy!</h3>
+                <p><img src="/Spillemaskine opgave/opgave/media/logo.png" alt="" width="75px">
+                    <img src="/Spillemaskine opgave/opgave/media/galaxy.png" alt="" width="75px">
+                    <img src="/Spillemaskine opgave/opgave/media/logo.png" alt="" width="75px"> = 2000
+                </p>
+                <h3>Alien Army!</h3>
+                <p><img src="/Spillemaskine opgave/opgave/media/ufo.png" alt="" width="75px">
+                    <img src="/Spillemaskine opgave/opgave/media/space-ship.png" alt="" width="75px">
+                    <img src="/Spillemaskine opgave/opgave/media/ufo.png" alt="" width="75px"> = 2500
+                </p>
+                <h3>Wormhole Alien!</h3>
+                <p><img src="/Spillemaskine opgave/opgave/media/galaxy.png" alt="" width="75px">
+                    <img src="/Spillemaskine opgave/opgave/media/space-ship.png" alt="" width="75px">
+                    <img src="/Spillemaskine opgave/opgave/media/logo.png" alt="" width="75px"> = 3000
+                </p>
+            </div>
+        </section>
+    </main>
+    <footer>
+    </footer>
+</body>
+</html>
