@@ -1,4 +1,3 @@
-
 gsap.registerPlugin(CustomEase);
 
 gsap.set(".nav",{display:"none"})
@@ -60,6 +59,15 @@ function initMenu(){
         openNav();
       }
     });    
+  });
+  
+  // Close menu when clicking on menu links
+  menuLinks.forEach((link) => {
+    link.addEventListener("click", () => {
+      if (navWrap.getAttribute("data-nav") === "open") {
+        closeNav();
+      }
+    });
   });
   
   // If menu is open, you can close it using the "escape" key
