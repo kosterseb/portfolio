@@ -401,82 +401,92 @@
 
         /* Page Transition Styles */
 
-.page-transition {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    z-index: 9999;
-    pointer-events: none;
-}
+        .page-transition {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: 9999;
+            pointer-events: none;
+        }
 
-.transition-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #e9e6e4;
-    /* Will be positioned by JavaScript */
-}
+        .transition-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #e9e6e4;
+            /* Will be positioned by JavaScript */
+        }
 
-.transition-overlay.secondary {
-    background-color: #e9e6e4;
-    /* Will be positioned by JavaScript */
-}
+        .transition-overlay.secondary {
+            background-color: #e9e6e4;
+            /* Will be positioned by JavaScript */
+        }
 
-.transition-loading {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: #e9e6e4;
-    font-family: "Space Grotesk", sans-serif;
-    font-size: 16px;
-    font-weight: 300;
-    letter-spacing: 2px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    opacity: 0; /* Will be controlled by JavaScript */
-}
+        .transition-loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #e9e6e4;
+            font-family: "Space Grotesk", sans-serif;
+            font-size: 16px;
+            font-weight: 300;
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            opacity: 0;
+            /* Will be controlled by JavaScript */
+        }
 
-.loading-text {
-    text-transform: uppercase;
-}
+        .loading-text {
+            text-transform: uppercase;
+        }
 
-.loading-dots {
-    display: inline-block;
-    width: 3px;
-    height: 3px;
-    border-radius: 50%;
-    background-color: #42be5b;
-    animation: loadingDots 1.4s infinite ease-in-out both;
-}
+        .loading-dots {
+            display: inline-block;
+            width: 3px;
+            height: 3px;
+            border-radius: 50%;
+            background-color: #42be5b;
+            animation: loadingDots 1.4s infinite ease-in-out both;
+        }
 
-.loading-dots:nth-child(2) { animation-delay: -0.32s; }
-.loading-dots:nth-child(3) { animation-delay: -0.16s; }
+        .loading-dots:nth-child(2) {
+            animation-delay: -0.32s;
+        }
 
-@keyframes loadingDots {
-    0%, 80%, 100% {
-        transform: scale(0.8);
-        opacity: 0.3;
-    }
-    40% {
-        transform: scale(1.2);
-        opacity: 1;
-    }
-}
+        .loading-dots:nth-child(3) {
+            animation-delay: -0.16s;
+        }
 
-/* Keep existing styles intact */
-.page-transitioning {
-    overflow: hidden;
-}
+        @keyframes loadingDots {
 
-.page-transitioning main {
-    opacity: 0;
-}
+            0%,
+            80%,
+            100% {
+                transform: scale(0.8);
+                opacity: 0.3;
+            }
+
+            40% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
+        }
+
+        /* Keep existing styles intact */
+        .page-transitioning {
+            overflow: hidden;
+        }
+
+        .page-transitioning main {
+            opacity: 0;
+        }
 
         /* Responsive design */
         @media screen and (max-width: 768px) {
@@ -566,13 +576,11 @@
             .menu-inner {
                 padding: 0 1.5rem;
             }
-            
+
             .menu-details {
                 padding-bottom: 1.5rem;
             }
         }
-
-        
     </style>
 </head>
 
@@ -661,8 +669,8 @@
                             <div class="socials-row">
                                 <a data-menu-fade="" href="https://www.instagram.com/kosterkoster_/" target="_blank"
                                     class="p-large text-link">Instagram</a>
-                                <a data-menu-fade="" href="https://www.linkedin.com/in/sebastian-køster-34802524b/" target="_blank"
-                                    class="p-large text-link">LinkedIn</a>
+                                <a data-menu-fade="" href="https://www.linkedin.com/in/sebastian-køster-34802524b/"
+                                    target="_blank" class="p-large text-link">LinkedIn</a>
                                 <a data-menu-fade="" href="https://github.com/kosterseb" target="_blank"
                                     class="p-large text-link">GitHub</a>
                                 <a data-menu-fade="" href="media/CV - Sebastian Køster.pdf" target="_blank"
@@ -712,6 +720,36 @@
                 </div>
             </div>
 
+            <!-- HiFi Horizon -->
+            <div class="project-card" data-project="hifi" style="margin-top: 50px">
+                <img src="media/hifitop.png" alt="HIFI Project" class="project-image">
+                <div class="project-content">
+                    <div class="project-category">Web Development</div>
+                    <h3 class="project-title">HiFi Horizon - HiFi Store</h3>
+                    <p class="project-description">A web-application for shopping sound equipment, fully supported with database and server. A project collaborated with Christian Reed.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">React + Vite</span>
+                        <span class="tech-tag">Vitest</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">JSON API Development</span>
+                        <span class="tech-tag">MongoDB + NoSQL</span>
+                        <span class="tech-tag">Renderer</span>
+                        <span class="tech-tag">Modern SASS</span>
+                        <span class="tech-tag">Git + Github</span>
+                        <span class="tech-tag">Github Pages</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/kosterseb/HiFiHorizon" target="_blank" class="project-link">
+                            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                            </svg>
+                            View Live
+                        </a>
+                    </div>
+                </div>
+            </div>
+
             <!-- Hotel Donatello -->
             <div class="project-card" data-project="donatello">
                 <img src="media/hotel-donatello.png" alt="donatello" class="project-image">
@@ -746,7 +784,8 @@
                 <div class="project-content">
                     <div class="project-category">Web Development</div>
                     <h3 class="project-title">Newsify App</h3>
-                    <p class="project-description">A news app that generates articles from The New York Times. You can save your articles and change what news you want to see in-app</p>
+                    <p class="project-description">A news app that generates articles from The New York Times. You can
+                        save your articles and change what news you want to see in-app</p>
                     <div class="project-tech">
                         <span class="tech-tag">React + Vite</span>
                         <span class="tech-tag">React-Routing</span>
@@ -862,7 +901,7 @@
                         <span class="tech-tag">Audio Engineering</span>
                         <span class="tech-tag">Theater</span>
                     </div>
-                    
+
                 </div>
             </div>
 
@@ -980,6 +1019,69 @@
         </div>
     </div>
 
+    <!-- HIFI Modal -->
+    <div id="modal-hifi" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <img src="media/hifitop.png" alt="Hifi Project" class="modal-image">
+                <button class="modal-close" data-close="modal-hifi">&times;</button>
+            </div>
+            <div class="modal-body">
+                <h2 class="modal-title">HIFI Horizon</h2>
+                <p class="modal-category">Web Development Project</p>
+                <p class="modal-description">
+                    HiFi Horizon is a comprehensive web application for shopping sound equipment, developed in
+                    collaboration with Christian Reed. The platform is fully supported with a database and server,
+                    providing users with a seamless shopping experience. The project showcases advanced web
+                    development techniques and a strong focus on user experience. The server + database handles
+                    product management, user authentication, and order processing. Also it supports the registration of
+                    users and login system and newsletter.
+                </p>
+                <div class="modal-features">
+                    <h3>Key Features</h3>
+                    <ul>
+                        <li>A fully functional shop with real professional use of tools</li>
+                        <li>Responsie server and real time data handling through the database to the client</li>
+                        <li>Real setup of user registration and login systems</li>
+                        <li>Newsletter and contact form that is handled by the server and the database</li>
+                        <li>High focus on data management</li>
+                    </ul>
+                </div>
+                <div class="modal-tech">
+                    <h3>Technologies Used</h3>
+                    <div class="modal-tech-grid">
+                        <span class="modal-tech-tag">React + Vite</span>
+                        <span class="modal-tech-tag">React Router</span>
+                        <span class="modal-tech-tag">JavaScript</span>
+                        <span class="modal-tech-tag">JSON API Development</span>
+                        <span class="modal-tech-tag">MongoDB + NoSQL</span>
+                        <span class="modal-tech-tag">Renderer</span>
+                        <span class="modal-tech-tag">Modern SASS</span>
+                        <span class="modal-tech-tag">Git + Github</span>
+                        <span class="modal-tech-tag">Github Pages</span>
+                    </div>
+                </div>
+                <div class="modal-links">
+                    <a href="https://kosterseb.github.io/HiFiHorizon" target="_blank" class="modal-link">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                        View Live Site
+                    </a>
+                    <a href="https://github.com/kosterseb/HiFiHorizon" target="_blank" class="modal-link">
+                        <svg fill="currentColor" viewBox="0 0 24 24">
+                            <path
+                                d="M12 0C5.374 0 0 5.373 0 12 0 17.302 3.438 21.8 8.207 23.387c.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z" />
+                        </svg>
+                        GitHub
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hotel Donatello Modal -->
     <div id="modal-donatello" class="modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -1152,7 +1254,8 @@
     <div id="modal-kowg" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <img src="media/Kinda_Whimsical_Games _LOGO_TRANSPARENT_COLOR.png" alt="KOWG Game Studio" class="modal-image">
+                <img src="media/Kinda_Whimsical_Games _LOGO_TRANSPARENT_COLOR.png" alt="KOWG Game Studio"
+                    class="modal-image">
                 <button class="modal-close" data-close="modal-kowg">&times;</button>
             </div>
             <div class="modal-body">
