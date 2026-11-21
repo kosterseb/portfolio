@@ -10,7 +10,7 @@ poster: /media/work/siphon-steel/loop.jpg
 links:
   - { label: Siphon Steel on the studio site, url: 'https://kindawhimsical.com/games/siphon-steel/' }
 featured: true
-order: 4
+order: 5
 ---
 
 Every spin pays out and every spin costs you. Siphon Steel is a small, grimy room, a slot machine, and a stranger across the table who keeps the score. We're building the first playable slice now.

@@ -9,7 +9,7 @@ clip: /media/work/pondoragon/loop.mp4
 poster: /media/work/pondoragon/loop.jpg
 links:
   - { label: Pondoragon on the studio site, url: 'https://kindawhimsical.com/games/pondoragon/' }
-order: 7
+order: 8
 ---
 
 You hatch as a tiny dragon in a pond and grow through meadows, rivers and sky, gaining legs, wings and scales as the run goes on. Every egg belongs to a deity, and reaching godhood means joining them.

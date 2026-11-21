@@ -10,7 +10,7 @@ poster: /media/work/kowg/loop.jpg
 links:
   - { label: Visit the studio, url: 'https://kindawhimsical.com' }
 featured: true
-order: 2
+order: 3
 ---
 
 Kinda Whimsical Games is Julie and me. She writes and draws, I program and make the music, and together we make odd little worlds. It's our studio project, and it keeps growing with every new game.

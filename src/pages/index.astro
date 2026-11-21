@@ -11,7 +11,7 @@ import { site, skills, socials } from '../site';
 import portrait from '../assets/photos/header.png';
 import profile from '../assets/photos/profile.png';
 import chef from '../assets/photos/chef.jpg';
-import dish from '../assets/photos/castle-dish.jpg';
+import sign from '../assets/work/dreamplan-sign.png';
 import artsy from '../assets/photos/artsy.jpg';
 
 const featured = (await getCollection('work', ({ data }) => data.featured && !data.draft)).sort(
@@ -23,7 +23,7 @@ const facts = [
   {
     tag: 'Work',
     title: 'Fullstack engineer',
-    text: 'At Dreamplan I build the frontend of a pension advisory platform: TypeScript, React and Next.js in a Turborepo, with a design system in Storybook holding it all together.',
+    text: 'At Dreamplan I build the frontend of our pension advisory platform and of Wizflow: TypeScript, React and Next.js in a Turborepo, with a design system in Storybook holding it all together.',
   },
   {
     tag: 'Games',
@@ -68,8 +68,8 @@ const journey = [
     text: 'Music the whole way through: producing and writing for labels and artists, editing for a production company, and four months scoring a Sartre play for the theatre.',
   },
   {
-    img: dish,
-    alt: 'A plated dish being finished with herbs',
+    img: sign,
+    alt: 'The Dreamplan logo on a sign outside the office',
     years: '2025 – now',
     title: 'The code',
     text: 'Web developer education at RTS while interning at Dreamplan, then full time as a fullstack engineer from October 2026. Same craft as the kitchen: details, timing and making something people enjoy.',

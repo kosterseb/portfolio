@@ -20,6 +20,10 @@ const work = defineCollection({
       clip: z.string().optional(),
       poster: z.string().optional(),
       links: z.array(z.object({ label: z.string(), url: z.string() })).default([]),
+      /** Extra images for the case study (src/assets/work). */
+      gallery: z.array(z.object({ src: image(), alt: z.string(), caption: z.string().optional() })).default([]),
+      /** Extra silent loops for the case study (public/media/work/<slug>/, .mp4 with a .webm next to it). */
+      footage: z.array(z.object({ src: z.string(), poster: z.string().optional(), caption: z.string() })).default([]),
       /** Shown in "Selected work" on the home page. */
       featured: z.boolean().default(false),
       order: z.number().default(99),

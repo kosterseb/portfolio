@@ -10,7 +10,7 @@ poster: /media/work/bindwheel/loop.jpg
 links:
   - { label: Bindwheel on the studio site, url: 'https://kindawhimsical.com/games/bindwheel/' }
 featured: false
-order: 6
+order: 7
 ---
 
 A tactics game about a crew of three bound spirits: one in front, one dealing damage and one keeping everyone alive. Fight it out automatically, or call every move yourself and react to what your opponent does.

@@ -10,7 +10,7 @@ poster: /media/work/grain/board.jpg
 links:
   - { label: Grain on the studio site, url: 'https://kindawhimsical.com/games/grain/' }
 featured: true
-order: 3
+order: 4
 ---
 
 A small kid crosses a desert that doesn't want to be crossed. Deep sand slows you down, storms force you to dig in, and there's almost no interface: you figure things out by looking.
