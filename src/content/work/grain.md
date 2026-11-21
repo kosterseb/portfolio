@@ -5,8 +5,8 @@ category: Games
 year: 2026
 role: Programming, music, game design
 stack: [React Three Fiber, Three.js, Electron, Howler.js, Gamepad API]
-clip: /media/work/grain/loop.mp4
-poster: /media/work/grain/loop.jpg
+clip: /media/work/grain/board.mp4
+poster: /media/work/grain/board.jpg
 links:
   - { label: Grain on the studio site, url: 'https://kindawhimsical.com/games/grain/' }
 featured: true

@@ -5,6 +5,7 @@ import Base from '../layouts/Base.astro';
 import Contour from '../components/Contour.astro';
 import Ticker from '../components/Ticker.astro';
 import Arrow from '../components/Arrow.astro';
+import SocialIcon from '../components/SocialIcon.astro';
 import WorkList from '../components/WorkList.astro';
 import { site, skills, socials } from '../site';
 import portrait from '../assets/photos/header.png';
@@ -145,8 +146,8 @@ const journey = [
             .filter((s) => s.url.startsWith('http'))
             .map((s) => (
               <li>
-                <a class="arrow-link" href={s.url} target="_blank" rel="noopener">
-                  {s.label.toLowerCase()}
+                <a class="social" href={s.url} target="_blank" rel="noopener" aria-label={s.label} title={s.label}>
+                  <SocialIcon name={s.label} />
                 </a>
               </li>
             ))
@@ -340,7 +341,7 @@ const journey = [
   /* ---------- Editorial ---------- */
   .editorial {
     display: grid;
-    grid-template-columns: 9rem minmax(0, 1.25fr) minmax(0, 1fr);
+    grid-template-columns: 10.5rem minmax(0, 1.25fr) minmax(0, 1fr);
     margin-top: clamp(3rem, 6vw, 5rem);
     border-top: 1px solid var(--line);
   }
@@ -370,17 +371,35 @@ const journey = [
   }
 
   .side-socials {
-    font-size: 0.95rem !important;
-    gap: 0.35rem !important;
+    display: flex !important;
+    gap: 0.4rem !important;
   }
 
-  .side-socials li::before {
-    content: '';
-    display: inline-block;
-    width: 0.6rem;
-    height: 0.6rem;
-    margin-right: 0.6rem;
-    background: var(--ink);
+  .social {
+    display: grid;
+    place-items: center;
+    width: 2.3rem;
+    height: 2.3rem;
+    color: var(--ink);
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    transition:
+      background 0.3s,
+      color 0.3s,
+      border-color 0.3s,
+      transform 0.4s var(--ease-out);
+  }
+
+  .social :global(svg) {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .social:hover,
+  .social:focus-visible {
+    background: var(--green);
+    border-color: var(--green);
+    transform: translateY(-3px);
   }
 
   .center {

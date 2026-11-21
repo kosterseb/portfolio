@@ -1,18 +1,27 @@
 ---
-/** Green and black panels that wipe across between pages, echoing the menu. */
+/**
+ * Loader + page transition. Every page opens behind the green/black curtain with a
+ * progress line; it lifts once fonts and the first images are ready, then the page's
+ * own animations start. Clicking an internal link brings the curtain back in.
+ */
 import { site } from '../site';
 ---
 
 <script is:inline>
   try {
-    if (sessionStorage.getItem('pt') && !matchMedia('(prefers-reduced-motion: reduce)').matches)
-      document.documentElement.classList.add('pt-in');
+    if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('pt-in');
   } catch (e) {}
 </script>
 
 <div class="pt" aria-hidden="true">
   <div class="pt-panel green"></div>
-  <div class="pt-panel ink"><span class="pt-label display">{site.name}</span></div>
+  <div class="pt-panel ink">
+    <div class="pt-loader">
+      <span class="pt-label display">{site.name}</span>
+      <span class="pt-bar"><span class="pt-fill"></span></span>
+      <span class="pt-count mono">0</span>
+    </div>
+  </div>
 </div>
 
 <style>
@@ -40,42 +49,109 @@ import { site } from '../site';
     color: var(--paper);
   }
 
-  .pt-label {
-    font-size: clamp(2rem, 6vw, 5rem);
+  .pt-loader {
+    display: grid;
+    justify-items: start;
+    gap: 1rem;
+    width: min(520px, 80vw);
   }
 
-  /* Arriving from another page: start covered, the script slides the panels away */
+  .pt-label {
+    font-size: clamp(2.4rem, 7vw, 5rem);
+  }
+
+  .pt-bar {
+    position: relative;
+    width: 100%;
+    height: 2px;
+    background: rgb(255 255 255 / 0.15);
+    overflow: hidden;
+  }
+
+  .pt-fill {
+    position: absolute;
+    inset: 0;
+    background: var(--green);
+    transform-origin: left center;
+    transform: scaleX(0);
+  }
+
+  .pt-count {
+    justify-self: end;
+    color: var(--green);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Page load: start covered, the script lifts the curtain when the page is ready */
   :global(html.pt-in) .pt-panel {
     transform: none;
+  }
+
+  :global(html.pt-in) {
+    overflow: hidden;
   }
 </style>
 
 <script>
   import { gsap } from 'gsap';
 
+  const html = document.documentElement;
   const panels = document.querySelectorAll<HTMLElement>('.pt-panel');
+  const fill = document.querySelector<HTMLElement>('.pt-fill');
+  const count = document.querySelector<HTMLElement>('.pt-count');
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const done = () => {
+    (window as any).__siteReady = true;
+    window.dispatchEvent(new Event('site:ready'));
+  };
 
-  function reveal() {
-    if (!document.documentElement.classList.contains('pt-in')) return;
-    sessionStorage.removeItem('pt');
+  // What "ready" means: fonts plus the images and posters in the first screen
+  function whenReady(): Promise<void> {
+    const imgs = [...document.images].filter((i) => i.loading !== 'lazy' && !i.complete);
+    const loads = imgs.map((i) => new Promise<void>((r) => ((i.onload = () => r()), (i.onerror = () => r()))));
+    const total = loads.length + 1;
+    let n = 0;
+    const tick = () => {
+      n++;
+      progress.target = Math.max(progress.target, Math.min(0.95, n / total));
+    };
+    loads.forEach((p) => p.then(tick));
+    const fonts = document.fonts.ready.then(tick);
+    const all = Promise.all([fonts, ...loads]).then(() => {});
+    const cap = new Promise<void>((r) => setTimeout(r, 3000)); // never hold the page hostage
+    return Promise.race([all, cap]);
+  }
+
+  // Smoothly animated progress number and line
+  const progress = { value: 0, target: 0.15 };
+  gsap.ticker.add(() => {
+    progress.value += (progress.target - progress.value) * 0.12;
+    if (fill) fill.style.transform = `scaleX(${progress.value})`;
+    if (count) count.textContent = String(Math.round(progress.value * 100));
+  });
+
+  async function reveal() {
+    if (!html.classList.contains('pt-in')) return done();
+    const minTime = new Promise((r) => setTimeout(r, 650));
+    await Promise.all([whenReady(), minTime]);
+    progress.target = 1;
+    await new Promise((r) => setTimeout(r, 350));
     gsap.to([...panels].reverse(), {
       xPercent: -101,
-      duration: 0.8,
+      duration: 0.9,
       ease: 'expo.inOut',
       stagger: 0.1,
-      delay: 0.1,
-      onComplete: () => {
-        document.documentElement.classList.remove('pt-in');
-        gsap.set(panels, { clearProps: 'transform' });
+      onStart: () => {
+        html.classList.remove('pt-in');
+        setTimeout(done, 350);
       },
+      onComplete: () => gsap.set(panels, { clearProps: 'transform' }),
     });
   }
 
   function leave(href: string) {
-    try {
-      sessionStorage.setItem('pt', '1');
-    } catch (e) {}
+    progress.value = 0;
+    progress.target = 0.15;
     gsap.fromTo(
       panels,
       { xPercent: 101 },
@@ -96,7 +172,10 @@ import { site } from '../site';
 
   // Coming back with the browser's back button can restore a covered page
   window.addEventListener('pageshow', (e) => {
-    if (e.persisted) gsap.set(panels, { xPercent: 101 });
+    if (e.persisted) {
+      html.classList.remove('pt-in');
+      gsap.set(panels, { xPercent: 101 });
+    }
   });
 
   reveal();

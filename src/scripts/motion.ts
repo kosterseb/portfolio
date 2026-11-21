@@ -6,7 +6,13 @@ import { SplitText } from 'gsap/SplitText';
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
+// Wait for the loader to lift so the entrance animations are actually seen
 export function initMotion() {
+  if ((window as any).__siteReady) return start();
+  window.addEventListener('site:ready', start, { once: true });
+}
+
+function start() {
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (reduce) return;
 
@@ -62,4 +68,5 @@ export function initMotion() {
       { yPercent: amount, ease: 'none', scrollTrigger: { trigger: el.parentElement, scrub: true } },
     );
   });
+  ScrollTrigger.refresh();
 }
