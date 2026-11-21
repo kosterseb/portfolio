@@ -1,0 +1,137 @@
+---
+import { site, socials } from '../site';
+import Contour from './Contour.astro';
+import Arrow from './Arrow.astro';
+
+interface Props {
+  bare?: boolean;
+}
+const { bare = false } = Astro.props;
+const year = new Date().getFullYear();
+---
+
+<footer class:list={['footer', { bare }]} data-contour-area>
+  {
+    !bare && (
+      <>
+        <Contour tone="dark" density={8} />
+        <div class="wrap cta">
+          <p class="mono kicker">Got a story that needs telling?</p>
+          <h2 class="big" data-split>
+            Let's bring it
+            <br />
+            to life
+          </h2>
+          <a class="mail" href={`mailto:${site.email}`}>
+            {site.email}
+            <Arrow />
+          </a>
+        </div>
+      </>
+    )
+  }
+  <div class="wrap bottom">
+    <span class="mono">© {year} {site.name}</span>
+    <span class="mono">{site.location}</span>
+    <ul>
+      {
+        socials.map((s) => (
+          <li>
+            <a class="link" href={s.url} {...(s.url.startsWith('http') ? { target: '_blank', rel: 'noopener' } : {})}>
+              {s.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    position: relative;
+    margin-top: clamp(5rem, 10vw, 9rem);
+    color: var(--paper-2);
+    background: var(--night);
+    border-radius: var(--radius) var(--radius) 0 0;
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  .footer :global(.contour) {
+    z-index: -1;
+  }
+
+  .footer.bare {
+    margin-top: 0;
+    border-radius: 0;
+  }
+
+  .cta {
+    display: grid;
+    gap: 1.75rem;
+    padding-block: clamp(5rem, 12vw, 10rem) clamp(3rem, 7vw, 6rem);
+  }
+
+  .kicker {
+    color: var(--green);
+  }
+
+  .big {
+    font-size: var(--step-5);
+  }
+
+  .mail {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    justify-self: start;
+    font-size: clamp(1.25rem, 0.9rem + 1.6vw, 2.25rem);
+    font-weight: 500;
+    font-stretch: 90%;
+    color: var(--paper-2);
+    text-decoration: none;
+    border-bottom: 1px solid rgb(255 255 255 / 0.3);
+    padding-bottom: 0.2rem;
+    transition:
+      color 0.3s,
+      border-color 0.3s;
+  }
+
+  .mail :global(svg) {
+    width: 0.8em;
+    height: 0.8em;
+    transition: transform 0.4s var(--ease-out);
+  }
+
+  .mail:hover {
+    color: var(--green);
+    border-color: var(--green);
+  }
+
+  .mail:hover :global(svg) {
+    transform: translate(3px, -3px) rotate(45deg);
+  }
+
+  .bottom {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem 2rem;
+    padding-block: 1.5rem;
+    border-top: 1px solid rgb(255 255 255 / 0.12);
+  }
+
+  .bottom ul {
+    display: flex;
+    gap: 1.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .bottom a {
+    color: var(--paper-2);
+  }
+</style>

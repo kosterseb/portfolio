@@ -1,0 +1,103 @@
+---
+/** Green and black panels that wipe across between pages, echoing the menu. */
+import { site } from '../site';
+---
+
+<script is:inline>
+  try {
+    if (sessionStorage.getItem('pt') && !matchMedia('(prefers-reduced-motion: reduce)').matches)
+      document.documentElement.classList.add('pt-in');
+  } catch (e) {}
+</script>
+
+<div class="pt" aria-hidden="true">
+  <div class="pt-panel green"></div>
+  <div class="pt-panel ink"><span class="pt-label display">{site.name}</span></div>
+</div>
+
+<style>
+  .pt {
+    position: fixed;
+    inset: 0;
+    z-index: 400;
+    pointer-events: none;
+  }
+
+  .pt-panel {
+    position: absolute;
+    inset: 0;
+    transform: translateX(101%);
+  }
+
+  .green {
+    background: var(--green);
+  }
+
+  .ink {
+    display: grid;
+    place-items: center;
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .pt-label {
+    font-size: clamp(2rem, 6vw, 5rem);
+  }
+
+  /* Arriving from another page: start covered, the script slides the panels away */
+  :global(html.pt-in) .pt-panel {
+    transform: none;
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap';
+
+  const panels = document.querySelectorAll<HTMLElement>('.pt-panel');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function reveal() {
+    if (!document.documentElement.classList.contains('pt-in')) return;
+    sessionStorage.removeItem('pt');
+    gsap.to([...panels].reverse(), {
+      xPercent: -101,
+      duration: 0.8,
+      ease: 'expo.inOut',
+      stagger: 0.1,
+      delay: 0.1,
+      onComplete: () => {
+        document.documentElement.classList.remove('pt-in');
+        gsap.set(panels, { clearProps: 'transform' });
+      },
+    });
+  }
+
+  function leave(href: string) {
+    try {
+      sessionStorage.setItem('pt', '1');
+    } catch (e) {}
+    gsap.fromTo(
+      panels,
+      { xPercent: 101 },
+      { xPercent: 0, duration: 0.65, ease: 'expo.inOut', stagger: 0.1, onComplete: () => (location.href = href) },
+    );
+  }
+
+  document.addEventListener('click', (e) => {
+    if (reduce || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    const a = (e.target as HTMLElement).closest('a');
+    if (!a || a.target || a.hasAttribute('download')) return;
+    const url = new URL(a.href, location.href);
+    if (url.origin !== location.origin || /\.(pdf|jpg|png|mp4|zip)$/i.test(url.pathname)) return;
+    if (url.pathname === location.pathname && url.hash) return;
+    e.preventDefault();
+    leave(url.href);
+  });
+
+  // Coming back with the browser's back button can restore a covered page
+  window.addEventListener('pageshow', (e) => {
+    if (e.persisted) gsap.set(panels, { xPercent: 101 });
+  });
+
+  reveal();
+</script>

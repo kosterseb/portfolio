@@ -1,0 +1,45 @@
+---
+import Base from '../layouts/Base.astro';
+import Contour from '../components/Contour.astro';
+---
+
+<Base title="Page not found">
+  <section class="lost" data-contour-area>
+    <Contour tone="light" density={12} />
+    <div class="inner">
+      <p class="mono">404</p>
+      <h1 data-split data-split-now>Off the map</h1>
+      <p class="lede">This page doesn't exist, or it moved. The map back starts here.</p>
+      <a class="btn" href="/">Back to the homepage</a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .lost {
+    position: relative;
+    min-height: 100svh;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    isolation: isolate;
+    overflow: hidden;
+  }
+
+  .lost :global(.contour) {
+    z-index: -1;
+  }
+
+  .inner {
+    display: grid;
+    gap: 1.25rem;
+    justify-items: center;
+    padding: 2rem;
+    background: rgb(232 229 224 / 0.82);
+    border-radius: var(--radius);
+  }
+
+  h1 {
+    font-size: var(--step-5);
+  }
+</style>

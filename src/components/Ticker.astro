@@ -1,0 +1,67 @@
+---
+/** The old marquee, rebuilt as a seamless CSS loop. */
+interface Props {
+  items: string[];
+}
+const { items } = Astro.props;
+---
+
+<div class="ticker" aria-label={items.join(', ')}>
+  {
+    [0, 1].map((n) => (
+      <ul class="track" aria-hidden={n === 1 ? 'true' : undefined}>
+        {items.map((i) => (
+          <li>{i}</li>
+        ))}
+      </ul>
+    ))
+  }
+</div>
+
+<style>
+  .ticker {
+    display: flex;
+    overflow: hidden;
+    background: var(--ink);
+    color: var(--paper-2);
+    border-radius: 0.4rem;
+    user-select: none;
+  }
+
+  .track {
+    display: flex;
+    flex-shrink: 0;
+    gap: 2.5rem;
+    margin: 0;
+    padding: 0.6rem 1.25rem 0.6rem 0;
+    list-style: none;
+    animation: ticker 40s linear infinite;
+  }
+
+  .ticker:hover .track {
+    animation-play-state: paused;
+  }
+
+  li {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+    white-space: nowrap;
+    font-size: 1rem;
+    font-stretch: 92%;
+  }
+
+  li::before {
+    content: '';
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 50%;
+    background: var(--green);
+  }
+
+  @keyframes ticker {
+    to {
+      transform: translateX(-100%);
+    }
+  }
+</style>

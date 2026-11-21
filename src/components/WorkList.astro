@@ -1,0 +1,249 @@
+---
+/**
+ * Project rows. On desktop the project's footage or cover follows the cursor while you hover a row;
+ * on touch screens the media sits inline in each row.
+ */
+import type { CollectionEntry } from 'astro:content';
+import WorkMedia from './WorkMedia.astro';
+import Arrow from './Arrow.astro';
+
+interface Props {
+  entries: CollectionEntry<'work'>[];
+}
+const { entries } = Astro.props;
+---
+
+<div class="work-list" data-work-list>
+  <ol>
+    {
+      entries.map((e, i) => (
+        <li data-reveal data-reveal-delay={String(i * 0.06)}>
+          <a href={`/work/${e.id}/`} class="row" data-index={i}>
+            <span class="mono idx">{String(i + 1).padStart(2, '0')}</span>
+            <span class="title display">{e.data.title}</span>
+            <span class="meta">
+              <span>{e.data.summary}</span>
+              <span class="mono muted">
+                {e.data.category} / {e.data.year}
+              </span>
+            </span>
+            <span class="go" aria-hidden="true">
+              <Arrow />
+            </span>
+            <span class="inline-media">
+              <WorkMedia entry={e} lazyClip />
+            </span>
+          </a>
+        </li>
+      ))
+    }
+  </ol>
+
+  <div class="preview" aria-hidden="true">
+    <div class="preview-inner">
+      {
+        entries.map((e) => (
+          <div class="slide">
+            <WorkMedia entry={e} lazyClip sizes="420px" />
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</div>
+
+<style>
+  .work-list {
+    position: relative;
+  }
+
+  ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .row {
+    position: relative;
+    display: grid;
+    grid-template-columns: 3rem minmax(0, 1.1fr) minmax(0, 1fr) 2.5rem;
+    align-items: center;
+    gap: 1.5rem;
+    padding-block: clamp(1.25rem, 2.5vw, 2rem);
+    color: inherit;
+    text-decoration: none;
+    isolation: isolate;
+  }
+
+  /* Green wash that fills the row from the bottom on hover */
+  .row::before {
+    content: '';
+    position: absolute;
+    inset: 0 calc(-1 * var(--gap));
+    z-index: -1;
+    background: var(--paper-2);
+    transform: scaleY(0);
+    transform-origin: 50% 100%;
+    transition: transform 0.55s cubic-bezier(0.65, 0.05, 0, 1);
+  }
+
+  .row:hover::before,
+  .row:focus-visible::before {
+    transform: scaleY(1);
+  }
+
+  .idx {
+    color: var(--green-ink);
+  }
+
+  .title {
+    font-size: clamp(2.4rem, 1.4rem + 3.6vw, 5rem);
+    transition: transform 0.55s var(--ease-out);
+  }
+
+  .row:hover .title {
+    transform: translateX(0.75rem);
+  }
+
+  .meta {
+    display: grid;
+    gap: 0.4rem;
+    font-size: 0.98rem;
+  }
+
+  .go {
+    display: grid;
+    place-items: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    border: 1px solid var(--ink);
+    transition:
+      background 0.3s,
+      transform 0.5s var(--ease-out);
+  }
+
+  .go :global(svg) {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .row:hover .go {
+    background: var(--green);
+    border-color: var(--green);
+    transform: rotate(45deg);
+  }
+
+  .inline-media {
+    display: none;
+  }
+
+  /* Cursor-following preview */
+  .preview {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 50;
+    width: clamp(320px, 30vw, 480px);
+    aspect-ratio: 4 / 3;
+    pointer-events: none;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    opacity: 0;
+    scale: 0.6;
+    transition:
+      opacity 0.35s ease,
+      scale 0.5s var(--ease-out);
+    box-shadow: 0 40px 80px -40px rgb(20 20 20 / 0.6);
+  }
+
+  .work-list.is-hovering .preview {
+    opacity: 1;
+    scale: 1;
+  }
+
+  .preview-inner {
+    height: 100%;
+    transition: transform 0.6s var(--ease);
+  }
+
+  .slide {
+    height: 100%;
+  }
+
+  @media (hover: none), (max-width: 900px) {
+    .preview {
+      display: none;
+    }
+
+    .row {
+      grid-template-columns: 2.5rem minmax(0, 1fr) 2.5rem;
+      gap: 0.75rem 1rem;
+    }
+
+    .meta {
+      grid-column: 2 / 4;
+    }
+
+    .go {
+      grid-column: 3;
+      grid-row: 1;
+    }
+
+    .inline-media {
+      display: block;
+      grid-column: 1 / -1;
+      aspect-ratio: 16 / 10;
+      border-radius: 0.6rem;
+      overflow: hidden;
+    }
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap';
+
+  document.querySelectorAll<HTMLElement>('[data-work-list]').forEach((list) => {
+    const preview = list.querySelector<HTMLElement>('.preview');
+    const inner = list.querySelector<HTMLElement>('.preview-inner');
+    if (!preview || !inner || !matchMedia('(hover: hover) and (min-width: 901px)').matches) return;
+
+    const slides = [...inner.querySelectorAll<HTMLElement>('.slide')];
+    const xTo = gsap.quickTo(preview, 'x', { duration: 0.6, ease: 'power3' });
+    const yTo = gsap.quickTo(preview, 'y', { duration: 0.6, ease: 'power3' });
+    const rTo = gsap.quickTo(preview, 'rotate', { duration: 0.8, ease: 'power3' });
+    let lastX = 0;
+
+    list.addEventListener('pointermove', (e) => {
+      const w = preview.offsetWidth;
+      const h = preview.offsetHeight;
+      xTo(e.clientX - w / 2);
+      yTo(e.clientY - h / 2);
+      rTo(gsap.utils.clamp(-8, 8, (e.clientX - lastX) * 0.6));
+      lastX = e.clientX;
+    });
+
+    list.querySelectorAll<HTMLElement>('.row').forEach((row) => {
+      const i = Number(row.dataset.index);
+      row.addEventListener('pointerenter', () => {
+        list.classList.add('is-hovering');
+        inner.style.transform = `translateY(${-i * 100}%)`;
+        slides.forEach((s, n) => {
+          const v = s.querySelector('video');
+          if (!v) return;
+          if (n === i) v.play().catch(() => {});
+          else v.pause();
+        });
+      });
+    });
+
+    list.addEventListener('pointerleave', () => {
+      list.classList.remove('is-hovering');
+      slides.forEach((s) => s.querySelector('video')?.pause());
+    });
+  });
+</script>

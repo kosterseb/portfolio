@@ -1,0 +1,304 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Ticker from '../components/Ticker.astro';
+import Arrow from '../components/Arrow.astro';
+import faroe from '../assets/photos/faroe.jpg';
+import chef from '../assets/photos/chef.jpg';
+import outdoors from '../assets/photos/outdoors.jpg';
+
+const skills = [
+  {
+    title: 'Frontend',
+    items: 'TypeScript, React, Next.js, Astro, HTML, CSS, Sass, Tailwind, GSAP, accessibility, responsive design',
+  },
+  { title: 'Backend & data', items: 'Node.js, Express, REST APIs, MongoDB, Firebase, SpacetimeDB, authentication' },
+  { title: 'Product & tooling', items: 'Turborepo, Storybook, design systems, Git and GitHub, Vitest, Docker, Figma' },
+  {
+    title: 'Games & 3D',
+    items: 'React Three Fiber, Three.js, WebGL and GLSL, PixiJS, Rapier, Electron, Expo, Howler.js',
+  },
+  { title: 'Sound & creative', items: 'Music production, composing, sound design, mixing, Photoshop, motion' },
+  { title: 'People', items: 'Project lead, running a kitchen team, teamwork under pressure, clear communication' },
+];
+---
+
+<Base title="About" description="Who Sebastian Køster is, how he works and what he makes outside of work.">
+  <header class="wrap intro">
+    <p class="mono label">About</p>
+    <h1 class="title" data-split data-split-now>Stories,<br />brought to life</h1>
+  </header>
+
+  <!-- WHO -->
+  <section class="wrap block" aria-labelledby="who">
+    <div class="block-head">
+      <h2 id="who" class="word" data-split>Who</h2>
+      <p class="mono muted">Personal</p>
+    </div>
+    <div class="block-body">
+      <div class="photo tall" data-reveal>
+        <Image src={faroe} alt="Sebastian on a hillside in the Faroe Islands" widths={[500, 900]} sizes="(min-width: 900px) 30vw, 90vw" data-parallax="8" />
+      </div>
+      <div class="text" data-reveal>
+        <h3 class="name">Sebastian Aguiar Køster</h3>
+        <p class="mono row"><span>Copenhagen, Denmark</span><span>Since 1993</span></p>
+        <p>
+          I'm a Danish-Uruguayan developer, born and raised in Copenhagen, with a curious mind and a habit of
+          learning by building. I've always been drawn to the place where art meets function: a dish that looks
+          beautiful and tastes right, a song that fits a scene, an interface that just makes sense.
+        </p>
+        <p>
+          When I'm not working, you'll find me making music, building games with my partner Julie, or cooking for
+          the people I care about. I think creativity travels well between disciplines, and every one of mine has
+          made me better at the others.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORK -->
+  <section class="wrap block" aria-labelledby="work">
+    <div class="block-head">
+      <h2 id="work" class="word" data-split>Work</h2>
+      <p class="mono muted">Professional</p>
+    </div>
+    <div class="block-body reverse">
+      <div class="photo" data-reveal>
+        <Image src={chef} alt="Sebastian at work in a restaurant kitchen" widths={[500, 900]} sizes="(min-width: 900px) 30vw, 90vw" data-parallax="8" />
+      </div>
+      <div class="text" data-reveal>
+        <h3>From kitchen to code</h3>
+        <p>
+          My working life started in kitchens. Nine years of them, from the team that earned Copenhague Paris two
+          Michelin stars to running the kitchen at Frederiksborg Castle as head chef. Kitchens teach you precision,
+          pace and how to keep a team calm when everything is on fire, sometimes literally.
+        </p>
+        <p>
+          Today I'm a fullstack engineer and frontend developer at Dreamplan, a Danish fintech making pension advice
+          understandable. I work in a Turborepo of Next.js apps, build and maintain the design system in Storybook,
+          and care a lot about the small things: how a number is formatted, how a page feels while it loads, whether
+          a form is easy to finish.
+        </p>
+        <p>
+          I see code as a craft, like cooking. You prepare well, you taste as you go, and nothing leaves the pass
+          until it's right.
+        </p>
+        <a class="arrow-link more" href="/cv/">read my CV <Arrow /></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CREATE -->
+  <section class="wrap block" aria-labelledby="create">
+    <div class="block-head">
+      <h2 id="create" class="word" data-split>Create</h2>
+      <p class="mono muted">Passions</p>
+    </div>
+    <div class="block-body">
+      <div class="photo tall" data-reveal>
+        <Image src={outdoors} alt="Sebastian resting on the grass, smiling" widths={[500, 900]} sizes="(min-width: 900px) 30vw, 90vw" data-parallax="8" />
+      </div>
+      <div class="text two" data-reveal>
+        <div>
+          <h3>Games</h3>
+          <p>
+            Games are where everything I do meets: code, stories, visuals and sound. At Kinda Whimsical Games I do the
+            programming and the music. Most of our games are built in React Three Fiber, and I've ended up writing a
+            lot of our own tools along the way, from weather systems to spatial audio.
+          </p>
+          <a class="arrow-link more" href="https://kindawhimsical.com" target="_blank" rel="noopener">visit the studio <Arrow /></a>
+        </div>
+        <div>
+          <h3>Music</h3>
+          <p>
+            Music has been part of me for as long as I can remember. I've produced for artists and labels, scored a
+            Sartre play for the theatre, and these days a lot of what I write ends up in our games. I studied
+            classical and jazz at Copenhagen Music Academy, and I still think in arrangements: what plays when, and
+            what stays quiet.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap ticker-wrap">
+    <Ticker items={['Fullstack engineer', 'Frontend developer', 'Game developer', 'Music producer', 'Former head chef']} />
+  </div>
+
+  <!-- Skills -->
+  <section class="wrap skills" aria-labelledby="skills">
+    <div class="block-head">
+      <h2 id="skills" class="word" data-split>Toolbox</h2>
+      <p class="mono muted">Skills & tools</p>
+    </div>
+    <ol class="skill-grid">
+      {
+        skills.map((s, i) => (
+          <li data-reveal data-reveal-delay={String((i % 3) * 0.06)}>
+            <span class="num display">{i + 1}</span>
+            <h3>{s.title}</h3>
+            <p class="muted">{s.items}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </section>
+</Base>
+
+<style>
+  .intro {
+    display: grid;
+    gap: 1.25rem;
+    padding-top: clamp(7rem, 14vw, 11rem);
+    padding-bottom: clamp(3rem, 6vw, 5rem);
+  }
+
+  .label {
+    color: var(--green-ink);
+  }
+
+  .title {
+    font-size: var(--step-5);
+  }
+
+  .block {
+    padding-block: clamp(3rem, 6vw, 5rem);
+    border-top: 1px solid var(--ink);
+  }
+
+  .block-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    margin-bottom: 2rem;
+  }
+
+  .word {
+    font-size: clamp(4rem, 2rem + 8vw, 10rem);
+  }
+
+  .block-body {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+    gap: clamp(2rem, 5vw, 5rem);
+    align-items: start;
+  }
+
+  .block-body.reverse .photo {
+    order: 2;
+  }
+
+  .photo {
+    aspect-ratio: 4 / 3;
+    border-radius: 0.75rem;
+    overflow: hidden;
+  }
+
+  .photo.tall {
+    aspect-ratio: 4 / 5;
+  }
+
+  .photo :global(img) {
+    width: 100%;
+    height: 118%;
+    object-fit: cover;
+  }
+
+  .text {
+    display: grid;
+    gap: 1.1rem;
+    font-size: 1.1rem;
+  }
+
+  .text p + p {
+    margin-top: 0;
+  }
+
+  .text h3 {
+    font-size: var(--step-2);
+  }
+
+  .name {
+    font-size: var(--step-3) !important;
+    font-stretch: 80% !important;
+    font-weight: 700 !important;
+  }
+
+  .row {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .text.two {
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+  }
+
+  .text.two > div {
+    display: grid;
+    gap: 1rem;
+    align-content: start;
+  }
+
+  .more {
+    justify-self: start;
+    font-size: 1.15rem;
+  }
+
+  .ticker-wrap {
+    margin-block: 2rem clamp(4rem, 8vw, 7rem);
+  }
+
+  .skills {
+    padding-top: clamp(3rem, 6vw, 5rem);
+    border-top: 1px solid var(--ink);
+  }
+
+  .skill-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid var(--line);
+  }
+
+  .skill-grid li {
+    display: grid;
+    gap: 0.6rem;
+    align-content: start;
+    padding: 1.75rem 1.5rem 2rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .num {
+    font-size: 3rem;
+    font-weight: 500;
+    font-stretch: 80%;
+    color: var(--green);
+  }
+
+  @media (max-width: 900px) {
+    .block-body,
+    .text.two {
+      grid-template-columns: 1fr;
+    }
+
+    .block-body.reverse .photo {
+      order: 0;
+    }
+
+    .skill-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 560px) {
+    .skill-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

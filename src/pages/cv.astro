@@ -1,0 +1,335 @@
+---
+import Base from '../layouts/Base.astro';
+import Arrow from '../components/Arrow.astro';
+import { site } from '../site';
+
+// Edit your CV here. Entries are listed newest first.
+const experience = [
+  {
+    when: '2026 – now',
+    title: 'Fullstack engineer / frontend developer',
+    place: 'Dreamplan.io',
+    where: 'Copenhagen',
+    points: [
+      'Building the frontend of a pension advisory platform and digital self-service tools.',
+      'Working in a Turborepo monorepo of Next.js apps with TypeScript and React.',
+      'Building and maintaining the shared design system and its components in Storybook.',
+    ],
+  },
+  {
+    when: 'Ongoing',
+    title: 'Co-founder, programmer & composer',
+    place: 'Kinda Whimsical Games',
+    where: 'Copenhagen',
+    points: [
+      'Two-person indie studio. I program our games and write their music.',
+      'React Three Fiber, Electron, Expo and SpacetimeDB; our own weather, audio and camera systems.',
+      'Designed and built the studio website in Astro.',
+    ],
+  },
+  {
+    when: 'Before 2025',
+    title: 'Head chef',
+    place: 'Rabarbergaarden på Slottet, Frederiksborg Castle',
+    where: 'Hillerød',
+    points: [
+      'Led the kitchen team, hiring and day-to-day operations.',
+      'Responsible for systems, IT, social media and infrastructure as well as the food.',
+    ],
+  },
+  {
+    when: '2017 – 2019',
+    title: 'Chef de partie',
+    place: 'Restaurant Copenhague Paris',
+    where: 'Paris',
+    points: ['Part of the team that earned two Michelin stars, and competed internationally.'],
+  },
+  {
+    when: 'Ongoing',
+    title: 'Music producer & writer',
+    place: 'Freelance',
+    where: '',
+    points: [
+      'Production, writing and artist work for labels and independent artists.',
+      'Theatre score and sound design for Sartre\'s No Exit (Lukkede Døre).',
+    ],
+  },
+  {
+    when: '2014 – 2015',
+    title: 'Backend / editor assistant, then editor',
+    place: 'Strong Productions',
+    where: 'Copenhagen',
+    points: ['Kept media, editing software and hardware running for the editors, and later edited for a year.'],
+  },
+];
+
+const education = [
+  { when: '2025 – 2026', title: 'Web developer (webudvikler)', place: 'Roskilde Tekniske Skole', note: 'Final project: Landrup Dans, a Next.js web app' },
+  { when: '2016 – 2020', title: 'Chef, gastronomy', place: 'Hotel- og Restaurantskolen', note: '' },
+  { when: '2015', title: 'Classical & jazz', place: 'Copenhagen Music Academy', note: '' },
+  { when: '2011 – 2014', title: 'STX, social science & music', place: 'Gribskov Gymnasium', note: '' },
+];
+
+const certificates = [
+  { when: '2021 – 2023', title: 'Associate Android Developer', place: 'Google' },
+  { when: '2020 – 2022', title: 'Google Cloud certification', place: 'Google' },
+];
+
+const languages = [
+  ['Danish', 'Native'],
+  ['English', 'Fluent'],
+  ['French', 'Basic'],
+];
+
+const skills = [
+  'TypeScript', 'React', 'Next.js', 'Astro', 'Node.js', 'Express', 'MongoDB', 'Firebase', 'SpacetimeDB',
+  'Turborepo', 'Storybook', 'Vitest', 'Git', 'Docker', 'GSAP', 'Three.js', 'React Three Fiber', 'WebGL',
+  'Electron', 'Expo', 'Sass', 'Tailwind', 'Figma',
+];
+---
+
+<Base title="CV" description="Experience, education and skills of Sebastian Køster, fullstack engineer and frontend developer.">
+  <header class="wrap intro">
+    <div>
+      <p class="mono label">Curriculum vitae</p>
+      <h1 class="title" data-split data-split-now>CV</h1>
+    </div>
+    <div class="intro-side" data-reveal data-reveal-delay="0.3">
+      <p class="lede">
+        Fullstack engineer and frontend developer with a past in Michelin kitchens and music studios. I care about
+        craft, teams and the details people notice without knowing why.
+      </p>
+      <div class="btn-row">
+        <a class="btn" href={site.cv} download>Download PDF <Arrow /></a>
+        <a class="btn btn--ghost" href={`mailto:${site.email}`}>Email me</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="wrap cv">
+    <section aria-labelledby="exp" class="col-main">
+      <h2 id="exp" class="h">Experience</h2>
+      <ol class="timeline">
+        {
+          experience.map((e) => (
+            <li data-reveal>
+              <p class="mono when">{e.when}</p>
+              <div class="entry">
+                <h3>{e.title}</h3>
+                <p class="place">
+                  {e.place}
+                  {e.where && <span class="muted">, {e.where}</span>}
+                </p>
+                <ul>
+                  {e.points.map((p) => (
+                    <li>{p}</li>
+                  ))}
+                </ul>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+
+      <h2 class="h">Education</h2>
+      <ol class="timeline">
+        {
+          education.map((e) => (
+            <li data-reveal>
+              <p class="mono when">{e.when}</p>
+              <div class="entry">
+                <h3>{e.title}</h3>
+                <p class="place">{e.place}</p>
+                {e.note && <p class="muted">{e.note}</p>}
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </section>
+
+    <aside class="col-side">
+      <section data-reveal>
+        <h2 class="h small">Skills</h2>
+        <ul class="chips">
+          {skills.map((s) => <li class="chip">{s}</li>)}
+        </ul>
+      </section>
+      <section data-reveal>
+        <h2 class="h small">Certificates</h2>
+        <ul class="plain">
+          {
+            certificates.map((c) => (
+              <li>
+                <span>{c.title}</span>
+                <span class="mono muted">{c.place}, {c.when}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+      <section data-reveal>
+        <h2 class="h small">Languages</h2>
+        <ul class="plain">
+          {
+            languages.map(([l, lvl]) => (
+              <li class="lang">
+                <span>{l}</span>
+                <span class="mono muted">{lvl}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+      <section data-reveal>
+        <h2 class="h small">Elsewhere</h2>
+        <ul class="plain">
+          <li><a class="arrow-link" href="https://github.com/kosterseb" target="_blank" rel="noopener">GitHub <Arrow /></a></li>
+          <li><a class="arrow-link" href="https://www.linkedin.com/in/sebastian-k%C3%B8ster-34802524b/" target="_blank" rel="noopener">LinkedIn <Arrow /></a></li>
+          <li><a class="arrow-link" href="/work/">Portfolio <Arrow /></a></li>
+        </ul>
+      </section>
+      <p class="mono muted">References available on request.</p>
+    </aside>
+  </div>
+</Base>
+
+<style>
+  .intro {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: end;
+    gap: 2rem;
+    padding-top: clamp(7rem, 14vw, 11rem);
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--ink);
+  }
+
+  .label {
+    color: var(--green-ink);
+    margin-bottom: 1rem;
+  }
+
+  .title {
+    font-size: var(--step-5);
+  }
+
+  .intro-side {
+    display: grid;
+    gap: 1.5rem;
+    justify-items: start;
+  }
+
+  .btn-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+
+  .btn :global(svg) {
+    width: 0.9em;
+    height: 0.9em;
+  }
+
+  .cv {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+    gap: clamp(2rem, 6vw, 6rem);
+    padding-top: 3rem;
+  }
+
+  .h {
+    font-size: var(--step-3);
+    margin: 0 0 1.5rem;
+  }
+
+  .h.small {
+    font-size: var(--step-2);
+    margin-bottom: 1rem;
+  }
+
+  .timeline {
+    margin: 0 0 4rem;
+    padding: 0;
+    list-style: none;
+  }
+
+  .timeline > li {
+    position: relative;
+    display: grid;
+    grid-template-columns: 9rem minmax(0, 1fr);
+    gap: 1.5rem;
+    padding-block: 1.5rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .when {
+    color: var(--green-ink);
+    padding-top: 0.3rem;
+  }
+
+  .entry {
+    display: grid;
+    gap: 0.35rem;
+  }
+
+  .place {
+    font-weight: 550;
+  }
+
+  .entry ul {
+    display: grid;
+    gap: 0.35rem;
+    margin: 0.5rem 0 0;
+    padding-left: 1.1rem;
+    color: var(--ink-2);
+  }
+
+  .entry ul li::marker {
+    color: var(--green);
+  }
+
+  .col-side {
+    position: sticky;
+    top: 6rem;
+    align-self: start;
+    display: grid;
+    gap: 2.5rem;
+  }
+
+  .plain {
+    display: grid;
+    gap: 0.6rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .plain li {
+    display: grid;
+    gap: 0.1rem;
+  }
+
+  .plain li.lang {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  @media (max-width: 900px) {
+    .intro,
+    .cv {
+      grid-template-columns: 1fr;
+    }
+
+    .col-side {
+      position: static;
+    }
+
+    .timeline > li {
+      grid-template-columns: 1fr;
+      gap: 0.4rem;
+    }
+  }
+</style>

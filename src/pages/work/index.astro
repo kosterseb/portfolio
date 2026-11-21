@@ -1,0 +1,287 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import WorkMedia from '../../components/WorkMedia.astro';
+import Arrow from '../../components/Arrow.astro';
+
+const entries = (await getCollection('work', ({ data }) => !data.draft)).sort((a, b) => a.data.order - b.data.order);
+const categories = ['All', ...new Set(entries.map((e) => e.data.category))];
+const count = (c: string) => (c === 'All' ? entries.length : entries.filter((e) => e.data.category === c).length);
+---
+
+<Base title="Work" description="Product work, websites, games and music by Sebastian Køster.">
+  <header class="wrap intro">
+    <h1 class="title" data-split data-split-now>Work</h1>
+    <p class="lede" data-reveal data-reveal-delay="0.3">
+      Product work at Dreamplan, websites for clients, the games we make at Kinda Whimsical Games, and the music
+      underneath it all. Pick a project for the whole story.
+    </p>
+  </header>
+
+  <div class="wrap filters" role="group" aria-label="Filter projects" data-reveal data-reveal-delay="0.4">
+    {
+      categories.map((c, i) => (
+        <button type="button" class="filter" data-filter={c} aria-pressed={i === 0 ? 'true' : 'false'}>
+          {c}
+          <sup class="mono">{count(c)}</sup>
+        </button>
+      ))
+    }
+  </div>
+
+  <ul class="wrap grid" data-grid>
+    {
+      entries.map((e, i) => (
+        <li class:list={['card', { wide: i === 0 }]} data-category={e.data.category}>
+          <a href={`/work/${e.id}/`}>
+            <div class="card-media">
+              <WorkMedia entry={e} lazyClip eager={i < 2} sizes={i === 0 ? '(min-width: 900px) 66vw, 100vw' : '(min-width: 900px) 33vw, 100vw'} />
+              <span class="go" aria-hidden="true">
+                <Arrow />
+              </span>
+            </div>
+            <div class="card-text">
+              <div class="card-top">
+                <h2 class="card-title">{e.data.title}</h2>
+                <span class="mono muted">{e.data.year}</span>
+              </div>
+              <p class="muted">{e.data.summary}</p>
+              <p class="mono cat">{e.data.category}</p>
+            </div>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</Base>
+
+<style>
+  .intro {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.8fr);
+    align-items: end;
+    gap: 2rem;
+    padding-top: clamp(7rem, 14vw, 11rem);
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--ink);
+  }
+
+  .title {
+    font-size: var(--step-5);
+  }
+
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding-block: 1.5rem 2.5rem;
+  }
+
+  .filter {
+    position: relative;
+    padding: 0.55em 1.1em;
+    font: 550 1rem / 1 var(--font);
+    font-stretch: 92%;
+    color: var(--ink);
+    background: transparent;
+    border: 1px solid var(--ink);
+    border-radius: 999px;
+    cursor: pointer;
+    transition:
+      background 0.3s,
+      color 0.3s;
+  }
+
+  .filter sup {
+    font-size: 0.65rem;
+    margin-left: 0.15rem;
+  }
+
+  .filter:hover {
+    background: var(--paper-2);
+  }
+
+  .filter[aria-pressed='true'] {
+    background: var(--ink);
+    color: var(--paper-2);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(2rem, 3vw, 3rem) clamp(1rem, 2vw, 1.75rem);
+    margin-block: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .card.wide {
+    grid-column: span 2;
+  }
+
+  .card.is-hidden {
+    display: none;
+  }
+
+  .card a {
+    display: grid;
+    gap: 1rem;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .card-media {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    border-radius: 0.75rem;
+    overflow: hidden;
+  }
+
+  .wide .card-media {
+    aspect-ratio: auto;
+    height: 100%;
+    min-height: 100%;
+  }
+
+  .card.wide a {
+    grid-template-rows: 1fr auto;
+    height: 100%;
+  }
+
+  .card-media :global(.media) {
+    transition: transform 0.9s var(--ease-out);
+  }
+
+  .card a:hover .card-media :global(.media) {
+    transform: scale(1.04);
+  }
+
+  .go {
+    position: absolute;
+    right: 0.9rem;
+    bottom: 0.9rem;
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 50%;
+    background: var(--green);
+    color: var(--ink);
+    transform: scale(0) rotate(-45deg);
+    transition: transform 0.5s var(--ease-out);
+  }
+
+  .go :global(svg) {
+    width: 1.1rem;
+    height: 1.1rem;
+  }
+
+  .card a:hover .go,
+  .card a:focus-visible .go {
+    transform: none;
+  }
+
+  .card-text {
+    display: grid;
+    gap: 0.35rem;
+  }
+
+  .card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+  }
+
+  .card-title {
+    font-size: clamp(1.8rem, 1.3rem + 1.4vw, 2.6rem);
+  }
+
+  .card-text p {
+    font-size: 0.95rem;
+  }
+
+  .cat {
+    color: var(--green-ink);
+  }
+
+  @media (max-width: 1000px) {
+    .grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 640px) {
+    .intro {
+      grid-template-columns: 1fr;
+    }
+
+    .grid {
+      grid-template-columns: 1fr;
+    }
+
+    .card.wide {
+      grid-column: auto;
+    }
+
+    .wide .card-media {
+      aspect-ratio: 4 / 3;
+      height: auto;
+    }
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap';
+  import { Flip } from 'gsap/Flip';
+  gsap.registerPlugin(Flip);
+
+  const grid = document.querySelector<HTMLElement>('[data-grid]');
+  const cards = [...document.querySelectorAll<HTMLElement>('[data-grid] .card')];
+  const buttons = [...document.querySelectorAll<HTMLButtonElement>('[data-filter]')];
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Filtering animates cards into their new places with GSAP Flip
+  buttons.forEach((btn) =>
+    btn.addEventListener('click', () => {
+      const f = btn.dataset.filter!;
+      buttons.forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
+      const state = Flip.getState(cards);
+      cards.forEach((c) => {
+        const show = f === 'All' || c.dataset.category === f;
+        c.classList.toggle('is-hidden', !show);
+        c.classList.toggle('wide', show && f === 'All' && c === cards[0]);
+      });
+      if (reduce) return;
+      Flip.from(state, {
+        duration: 0.7,
+        ease: 'expo.inOut',
+        scale: true,
+        absolute: true,
+        stagger: 0.03,
+        onEnter: (els) => gsap.fromTo(els, { opacity: 0, scale: 0.9 }, { opacity: 1, scale: 1, duration: 0.6 }),
+        onLeave: (els) => gsap.to(els, { opacity: 0, scale: 0.9, duration: 0.4 }),
+      });
+    }),
+  );
+
+  // Footage plays while you hover a card
+  if (matchMedia('(hover: hover)').matches) {
+    cards.forEach((c) => {
+      const v = c.querySelector('video');
+      if (!v) return;
+      c.addEventListener('pointerenter', () => v.play().catch(() => {}));
+      c.addEventListener('pointerleave', () => v.pause());
+    });
+  } else {
+    // Touch screens: play whatever is on screen
+    const io = new IntersectionObserver((es) =>
+      es.forEach((e) => {
+        const v = e.target as HTMLVideoElement;
+        if (e.isIntersecting && !reduce) v.play().catch(() => {});
+        else v.pause();
+      }),
+    );
+    grid?.querySelectorAll('video').forEach((v) => io.observe(v));
+  }
+</script>
