@@ -5,6 +5,7 @@
  * own animations start. Clicking an internal link brings the curtain back in.
  */
 import { site } from '../site';
+import Contour from './Contour.astro';
 ---
 
 <script is:inline>
@@ -16,6 +17,7 @@ import { site } from '../site';
 <div class="pt" aria-hidden="true">
   <div class="pt-panel green"></div>
   <div class="pt-panel ink">
+    <Contour tone="dark" density={11} instant class="pt-contour" />
     <div class="pt-loader">
       <span class="pt-label display">{site.name}</span>
       <span class="pt-bar"><span class="pt-fill"></span></span>
@@ -47,6 +49,26 @@ import { site } from '../site';
     place-items: center;
     background: var(--ink);
     color: var(--paper);
+    isolation: isolate;
+    overflow: hidden;
+  }
+
+  .ink :global(.pt-contour) {
+    z-index: -1;
+  }
+
+  /* Soft dark glow behind the name so the lines don't run through it */
+  .ink::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: radial-gradient(ellipse 38% 30% at 50% 50%, rgb(17 19 17 / 0.92), rgb(17 19 17 / 0) 100%);
+    pointer-events: none;
+  }
+
+  .pt-loader {
+    position: relative;
   }
 
   .pt-loader {
@@ -132,17 +154,24 @@ import { site } from '../site';
 
   async function reveal() {
     if (!html.classList.contains('pt-in')) return done();
-    const minTime = new Promise((r) => setTimeout(r, 650));
+    let first = false;
+    try {
+      first = !sessionStorage.getItem('sk-visited');
+      sessionStorage.setItem('sk-visited', '1');
+    } catch (e) {}
+    const minTime = new Promise((r) => setTimeout(r, first ? 1600 : 700));
     await Promise.all([whenReady(), minTime]);
     progress.target = 1;
     await new Promise((r) => setTimeout(r, 350));
+    // Pin both panels in place before dropping the class, so neither jumps back to the right
+    gsap.set(panels, { xPercent: 0 });
+    html.classList.remove('pt-in');
     gsap.to([...panels].reverse(), {
       xPercent: -101,
       duration: 0.9,
       ease: 'expo.inOut',
       stagger: 0.1,
       onStart: () => {
-        html.classList.remove('pt-in');
         setTimeout(done, 350);
       },
       onComplete: () => gsap.set(panels, { clearProps: 'transform' }),

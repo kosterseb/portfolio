@@ -81,37 +81,41 @@ const journey = [
   <!-- ---------- Hero ---------- -->
   <section class="hero" data-contour-area aria-labelledby="hero-name">
     <div class="hero-card">
-      <Contour tone="light" density={10} />
-      <div class="hero-top">
-        <p class="mono">{site.location}</p>
-        <p class="mono status"><span class="dot" aria-hidden="true"></span> Currently building at Dreamplan</p>
-      </div>
-      <figure class="hero-portrait">
+      <div class="hero-photo">
         <Image
           src={portrait}
           alt="Sebastian Køster, seen from behind, looking up at the sky"
-          widths={[480, 800, 1100]}
-          sizes="(min-width: 900px) 30vw, 60vw"
+          widths={[700, 1100, 1600]}
+          sizes="(min-width: 900px) 55vw, 100vw"
           loading="eager"
           fetchpriority="high"
-          data-parallax="6"
         />
-      </figure>
-      <div class="hero-bottom">
-        <h1 id="hero-name" class="hero-name" data-split data-split-now data-split-delay="0.25">
+      </div>
+      <Contour tone="light" density={10} class="hero-contour" />
+
+      <div class="hero-content">
+        <div class="hero-meta">
+          <p class="mono status"><span class="dot" aria-hidden="true"></span> Fullstack engineer at Dreamplan</p>
+          <p class="mono muted">{site.location}</p>
+        </div>
+
+        <h1 id="hero-name" class="hero-name" data-split data-split-now data-split-delay="0.2">
           Sebastian<br />Køster
         </h1>
-        <div class="hero-intro" data-reveal data-reveal-delay="0.6">
+
+        <div class="hero-intro" data-reveal data-reveal-delay="0.5">
           <p class="lede">
-            Fullstack engineer and frontend developer at Dreamplan. I bring stories to life in code, in games and in
-            sound.
+            Frontend at heart, fullstack by trade. I build products people trust and games people get lost in, and
+            I bring the stories behind them to life.
           </p>
           <div class="btn-row">
-            <a class="btn" href="/work/">See my work</a>
+            <a class="btn" href="/work/">See my work <Arrow /></a>
             <a class="btn btn--ghost" href="/cv/">Read my CV</a>
           </div>
         </div>
       </div>
+
+      <p class="mono scroll" aria-hidden="true">Scroll</p>
     </div>
     <div class="hero-ticker">
       <Ticker items={skills} />
@@ -244,23 +248,63 @@ const journey = [
 
   .hero-card {
     position: relative;
-    display: grid;
-    grid-template-rows: auto 1fr auto;
     min-height: calc(100svh - 2 * var(--gap) - 3rem);
-    padding: clamp(4rem, 8vw, 5.5rem) clamp(1.25rem, 3vw, 2.5rem) clamp(1.25rem, 3vw, 2.5rem);
     border-radius: var(--radius);
     overflow: hidden;
     isolation: isolate;
+    /* White underneath so the contour (multiplied on top) keeps its own colours */
+    background: #fff;
   }
 
-  .hero-card :global(.contour) {
-    z-index: -1;
+  /* The photo fills the right side and fades into the map */
+  .hero-photo {
+    position: absolute;
+    inset: 0 0 0 auto;
+    width: 64%;
+    z-index: 0;
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, rgb(0 0 0 / 0.55) 28%, #000 55%);
+    mask-image: linear-gradient(to right, transparent 0%, rgb(0 0 0 / 0.55) 28%, #000 55%);
   }
 
-  .hero-top {
+  .hero-photo :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 35% 40%;
+    filter: saturate(0.75) contrast(1.05);
+  }
+
+  /* Contour lines run across everything, photo included */
+  .hero-card :global(.hero-contour) {
+    z-index: 1;
+    mix-blend-mode: multiply;
+    pointer-events: none;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
     display: grid;
-    gap: 0.35rem;
+    grid-template-rows: auto 1fr auto;
+    gap: 2rem;
+    min-height: inherit;
+    width: min(46rem, 62%);
+    padding: clamp(6rem, 11vh, 8rem) clamp(1.25rem, 3.5vw, 3rem) clamp(1.5rem, 4vw, 3rem);
+  }
+
+  .hero-meta {
+    display: grid;
+    gap: 0.4rem;
+    align-content: start;
     justify-items: start;
+  }
+
+  .hero-meta p {
+    padding: 0.4rem 0.75rem;
+    border-radius: 999px;
+    background: rgb(242 240 236 / 0.82);
+    backdrop-filter: blur(6px);
+    color: var(--ink);
   }
 
   .status {
@@ -287,36 +331,9 @@ const journey = [
     }
   }
 
-  .hero-portrait {
-    position: absolute;
-    top: clamp(5rem, 12vh, 8rem);
-    right: clamp(1.25rem, 6vw, 7rem);
-    width: clamp(280px, 36vw, 560px);
-    aspect-ratio: 16 / 10;
-    margin: 0;
-    border-radius: 0.75rem;
-    overflow: hidden;
-    box-shadow: 0 30px 60px -30px rgb(20 20 20 / 0.5);
-    rotate: 1.5deg;
-  }
-
-  .hero-portrait :global(img) {
-    width: 100%;
-    height: 116%;
-    object-fit: cover;
-    object-position: 40% 35%;
-  }
-
-  .hero-bottom {
-    grid-row: 3;
-    display: grid;
-    grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
-    align-items: end;
-    gap: 2rem;
-  }
-
   .hero-name {
-    font-size: min(var(--step-5), 10.2vw);
+    align-self: end;
+    font-size: min(var(--step-5), 11.5vw);
     line-height: 0.8;
     white-space: nowrap;
   }
@@ -325,13 +342,40 @@ const journey = [
     display: grid;
     gap: 1.5rem;
     justify-items: start;
-    padding-bottom: 0.6rem;
+    max-width: 34rem;
+  }
+
+  .hero-intro .lede {
+    font-size: clamp(1.15rem, 0.95rem + 0.7vw, 1.5rem);
   }
 
   .btn-row {
     display: flex;
     flex-wrap: wrap;
     gap: 0.6rem;
+  }
+
+  .btn :global(svg) {
+    width: 0.9em;
+    height: 0.9em;
+  }
+
+  .scroll {
+    position: absolute;
+    z-index: 2;
+    right: clamp(1.25rem, 3.5vw, 3rem);
+    bottom: clamp(1.5rem, 4vw, 3rem);
+    padding: 0.45rem 0.8rem;
+    border-radius: 999px;
+    background: rgb(242 240 236 / 0.8);
+    backdrop-filter: blur(6px);
+    animation: nudge 2.4s ease-in-out infinite;
+  }
+
+  @keyframes nudge {
+    50% {
+      translate: 0 4px;
+    }
   }
 
   .hero-ticker {
@@ -597,30 +641,25 @@ const journey = [
   }
 
   @media (max-width: 820px) {
+    .hero-photo {
+      inset: 0 0 auto 0;
+      width: 100%;
+      height: 48%;
+      -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent);
+      mask-image: linear-gradient(to bottom, #000 55%, transparent);
+    }
+
+    .hero-content {
+      width: 100%;
+      padding-top: 5.5rem;
+    }
+
     .hero-name {
       font-size: 19vw;
     }
 
-    .hero-bottom {
-      grid-template-columns: 1fr;
-    }
-
-    .hero-portrait {
-      position: relative;
-      top: auto;
-      right: auto;
-      width: 80%;
-      justify-self: end;
-      margin-block: 1.5rem 2rem;
-    }
-
-    .hero-card {
-      grid-template-rows: auto auto auto;
-    }
-
-    .hero-top {
-      flex-direction: column;
-      gap: 0.3rem;
+    .scroll {
+      display: none;
     }
 
     .editorial {

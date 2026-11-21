@@ -8,11 +8,13 @@ interface Props {
   tone?: 'light' | 'dark';
   density?: number;
   class?: string;
+  /** Show the canvas straight away instead of fading it in. */
+  instant?: boolean;
 }
-const { tone = 'light', density = 9, class: className } = Astro.props;
+const { tone = 'light', density = 9, class: className, instant = false } = Astro.props;
 ---
 
-<div class:list={['contour', tone, className]} data-contour data-tone={tone} data-density={density} aria-hidden="true">
+<div class:list={['contour', tone, className, { instant }]} data-contour data-tone={tone} data-density={density} aria-hidden="true">
   <canvas></canvas>
 </div>
 
@@ -48,6 +50,10 @@ const { tone = 'light', density = 9, class: className } = Astro.props;
 
   .contour.is-live canvas {
     opacity: 1;
+  }
+
+  .contour.instant canvas {
+    transition: none;
   }
 </style>
 
