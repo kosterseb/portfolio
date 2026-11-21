@@ -13,7 +13,7 @@ featured: true
 order: 2
 ---
 
-Kinda Whimsical Games is Julie and me. She writes and draws, I program and make the music, and together we make odd little worlds.
+Kinda Whimsical Games is Julie and me. She writes and draws, I program and make the music, and together we make odd little worlds. It's our studio project, and it keeps growing with every new game.
 
 Most of our games run on React Three Fiber wrapped in Electron for desktop, with SpacetimeDB on the server side when a game needs to stay online. I've ended up building a lot of our own tech along the way: weather and day/night systems, spatial audio, camera rigs and tools for getting the hand-drawn look into 3D.
 

@@ -1,0 +1,336 @@
+---
+/**
+ * Printable CV in the portfolio's style. Not linked anywhere: it's rendered to
+ * public/cv/sebastian-koster-cv.pdf with `node scripts/cv-pdf.mjs` (see README).
+ */
+import '../styles/global.css';
+import { Image } from 'astro:assets';
+import { summary, experience, education, certificates, languages, cvSkills } from '../data/cv';
+import { site } from '../site';
+import band from '../assets/photos/contour-band.png';
+import portrait from '../assets/photos/portrait.jpg';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="robots" content="noindex" />
+    <title>CV, {site.name}</title>
+  </head>
+  <body>
+    <div class="page">
+      <header class="band">
+        <Image class="band-bg" src={band} alt="" width={1600} />
+        <div class="band-inner">
+          <div>
+            <p class="mono green">Curriculum vitae</p>
+            <h1>Sebastian<br />Køster</h1>
+            <p class="role">{site.role}</p>
+          </div>
+          <Image class="photo" src={portrait} alt="Sebastian Køster" width={400} />
+        </div>
+      </header>
+
+      <ul class="contact mono">
+        <li>{site.email}</li>
+        <li>{site.location}</li>
+        <li>sebastiankoster.dev</li>
+        <li>github.com/kosterseb</li>
+        <li>linkedin.com/in/sebastian-køster</li>
+      </ul>
+
+      <div class="cols">
+        <main>
+          <section>
+            <h2>Experience</h2>
+            <ol class="tl">
+              {
+                experience.map((e) => (
+                  <li>
+                    <p class="mono green when">{e.when}</p>
+                    <div>
+                      <h3>{e.title}</h3>
+                      <p class="place">
+                        {e.place}
+                        {e.where && <span class="muted">, {e.where}</span>}
+                      </p>
+                      <ul>
+                        {e.points.map((p) => (
+                          <li>{p}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  </li>
+                ))
+              }
+            </ol>
+          </section>
+        </main>
+
+        <aside>
+          <section>
+            <h2 class="sm">Profile</h2>
+            <p>{summary}</p>
+          </section>
+          <section>
+            <h2 class="sm">Skills</h2>
+            <ul class="chips">
+              {cvSkills.map((s) => <li class="chip">{s}</li>)}
+            </ul>
+          </section>
+          <section>
+            <h2 class="sm">Certificates</h2>
+            <ul class="plain">
+              {
+                certificates.map((c) => (
+                  <li>
+                    {c.title}
+                    <span class="mono muted">{c.place}, {c.when}</span>
+                  </li>
+                ))
+              }
+            </ul>
+          </section>
+          <section>
+            <h2 class="sm">Languages</h2>
+            <ul class="plain">
+              {
+                languages.map(([l, lvl]) => (
+                  <li class="lang">
+                    <span>{l}</span>
+                    <span class="mono muted">{lvl}</span>
+                  </li>
+                ))
+              }
+            </ul>
+          </section>
+          <section>
+            <h2 class="sm">Education</h2>
+            <ol class="tl edu">
+              {
+                education.map((e) => (
+                  <li>
+                    <p class="mono green when">{e.when}</p>
+                    <div>
+                      <h3>{e.title}</h3>
+                      <p class="place">
+                        {e.place}
+                        {e.note && <span class="muted"><br />{e.note}</span>}
+                      </p>
+                    </div>
+                  </li>
+                ))
+              }
+            </ol>
+          </section>
+        </aside>
+      </div>
+    </div>
+  </body>
+</html>
+
+<style is:global>
+  @page {
+    size: A4;
+    margin: 0;
+  }
+
+  html,
+  body {
+    background: var(--paper);
+  }
+
+  body {
+    font-size: 8.9pt;
+    line-height: 1.38;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 0 auto;
+    padding: 8mm 11mm 8mm;
+  }
+
+  .band {
+    position: relative;
+    height: 46mm;
+    border-radius: 4mm;
+    overflow: hidden;
+  }
+
+  .band-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .band-inner {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    height: 100%;
+    padding: 6mm 7mm;
+  }
+
+  h1 {
+    font-size: 40pt;
+    line-height: 0.82;
+    margin-top: 2mm;
+  }
+
+  .role {
+    margin-top: 2.5mm;
+    font-size: 11pt;
+    font-weight: 550;
+  }
+
+  .photo {
+    width: 30mm;
+    height: 36mm;
+    object-fit: cover;
+    object-position: 60% 30%;
+    border-radius: 3mm;
+    rotate: 2deg;
+    box-shadow: 0 4mm 8mm -4mm rgb(0 0 0 / 0.4);
+  }
+
+  .green {
+    color: var(--green-ink);
+  }
+
+  .contact {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1mm 6mm;
+    margin: 4mm 0 0;
+    padding: 2.5mm 0;
+    list-style: none;
+    border-bottom: 0.3mm solid var(--ink);
+    font-size: 7.6pt;
+  }
+
+  .cols {
+    display: grid;
+    grid-template-columns: 1.75fr 1fr;
+    gap: 8mm;
+    margin-top: 4mm;
+  }
+
+  section + section {
+    margin-top: 4mm;
+  }
+
+  h2 {
+    font-size: 17pt;
+    margin-bottom: 2.5mm;
+  }
+
+  h2.sm {
+    font-size: 12pt;
+    margin-bottom: 1.8mm;
+  }
+
+  h3 {
+    font-size: 10.5pt;
+  }
+
+  .tl {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .tl > li {
+    display: grid;
+    grid-template-columns: 21mm 1fr;
+    gap: 3mm;
+    padding-block: 2mm;
+    border-top: 0.2mm solid var(--line);
+    break-inside: avoid;
+  }
+
+  .edu > li {
+    grid-template-columns: 1fr;
+    gap: 0.2mm;
+    padding-block: 1.4mm;
+  }
+
+  .edu h3 {
+    font-size: 9.6pt;
+  }
+
+  .when {
+    font-size: 7.2pt;
+    padding-top: 0.6mm;
+  }
+
+  .place {
+    font-weight: 550;
+  }
+
+  .tl ul {
+    margin: 1mm 0 0;
+    padding-left: 3.5mm;
+    color: var(--ink-2);
+  }
+
+  .tl ul li::marker {
+    color: var(--green);
+  }
+
+  aside p {
+    color: var(--ink-2);
+  }
+
+  .chips {
+    gap: 1.2mm;
+  }
+
+  .chip {
+    font-size: 6.8pt;
+    padding: 0.6mm 2mm;
+    border-color: var(--line);
+  }
+
+  .plain {
+    display: grid;
+    gap: 1.6mm;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .plain li {
+    display: grid;
+  }
+
+  .plain li.lang {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 1mm;
+    border-bottom: 0.2mm solid var(--line);
+  }
+
+  .refs {
+    margin-top: 3mm;
+  }
+
+  @media screen {
+    body {
+      padding: 10mm 0;
+      background: #cfcac2;
+    }
+
+    .page {
+      background: var(--paper);
+      box-shadow: 0 2mm 10mm rgb(0 0 0 / 0.2);
+    }
+  }
+</style>

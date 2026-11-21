@@ -15,7 +15,7 @@ npm run build
 | Projects (one markdown file each) | `src/content/work/*.md` |
 | Project images | `src/assets/work/` |
 | Project footage (silent loops) | `public/media/work/<slug>/loop.mp4` + `.webm` + `.jpg` |
-| CV content | `src/pages/cv.astro` (arrays at the top) |
+| CV content (page and PDF) | `src/data/cv.ts` |
 | CV PDF | `public/cv/sebastian-koster-cv.pdf` |
 | Email, socials, skills ticker | `src/site.ts` |
 | The menu | `src/components/Menu.astro` |
@@ -45,6 +45,16 @@ The story, in markdown.
 ```
 
 Without a cover or clip, the project gets a dark typographic cover.
+
+## Updating the CV PDF
+
+The CV content lives in `src/data/cv.ts` and feeds both the CV page and the PDF. To regenerate the PDF after editing it:
+
+```sh
+npm run build
+npx astro preview --port 4330 &
+python3 scripts/cv-pdf.py          # needs: pip install playwright && playwright install chromium
+```
 
 ## Deployment
 

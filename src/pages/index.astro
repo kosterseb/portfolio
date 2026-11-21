@@ -7,7 +7,7 @@ import Ticker from '../components/Ticker.astro';
 import Arrow from '../components/Arrow.astro';
 import WorkList from '../components/WorkList.astro';
 import { site, skills, socials } from '../site';
-import portrait from '../assets/photos/portrait.jpg';
+import portrait from '../assets/photos/header.png';
 import profile from '../assets/photos/profile.png';
 import chef from '../assets/photos/chef.jpg';
 import dish from '../assets/photos/castle-dish.jpg';
@@ -37,7 +37,7 @@ const facts = [
   {
     tag: 'Food',
     title: 'Former head chef',
-    text: 'Nine years in kitchens, from two Michelin stars to head chef at Frederiksborg Castle. It taught me precision, pace and teamwork.',
+    text: 'From 2017 to 2024 I cooked at places like Noma, Alchemist and Copenhague in Paris, ending as head chef at Frederiksborg Castle. It taught me precision, pace and teamwork.',
   },
   {
     tag: 'Personal',
@@ -55,9 +55,9 @@ const journey = [
   {
     img: chef,
     alt: 'Sebastian cooking in a professional kitchen',
-    years: 'Nine years',
+    years: '2017 – 2024',
     title: 'The kitchen',
-    text: 'Nine years in restaurants: chef de partie on the team that earned Copenhague Paris two Michelin stars, then head chef at Frederiksborg Castle, running a team and the systems behind it.',
+    text: 'Noma, Alchemist and Copenhague in Paris, where the team earned two Michelin stars, then head chef at Frederiksborg Castle, running a team and the systems behind it.',
   },
   {
     img: artsy,
@@ -71,7 +71,7 @@ const journey = [
     alt: 'A plated dish being finished with herbs',
     years: '2025 – now',
     title: 'The code',
-    text: 'Web developer education at RTS, then straight into Dreamplan as a fullstack engineer. Same craft as the kitchen: details, timing and making something people enjoy.',
+    text: 'Web developer education at RTS while interning at Dreamplan, then full time as a fullstack engineer from October 2026. Same craft as the kitchen: details, timing and making something people enjoy.',
   },
 ];
 ---
@@ -88,7 +88,7 @@ const journey = [
       <figure class="hero-portrait">
         <Image
           src={portrait}
-          alt="Portrait of Sebastian Køster"
+          alt="Sebastian Køster, seen from behind, looking up at the sky"
           widths={[480, 800, 1100]}
           sizes="(min-width: 900px) 30vw, 60vw"
           loading="eager"
@@ -170,7 +170,7 @@ const journey = [
           story underneath.
         </p>
         <p>
-          Before code I spent nine years as a chef and a lot more making music, so I'm used to high standards, tight
+          Before code I spent years as a chef in some of the best kitchens around, and even longer making music, so I'm used to high standards, tight
           timing and working in a team. Today I put all of that into products people use every day, and into the
           games I make with my partner at Kinda Whimsical Games.
         </p>
@@ -290,20 +290,20 @@ const journey = [
     position: absolute;
     top: clamp(5rem, 12vh, 8rem);
     right: clamp(1.25rem, 6vw, 7rem);
-    width: clamp(200px, 24vw, 360px);
-    aspect-ratio: 4 / 5;
+    width: clamp(280px, 36vw, 560px);
+    aspect-ratio: 16 / 10;
     margin: 0;
     border-radius: 0.75rem;
     overflow: hidden;
     box-shadow: 0 30px 60px -30px rgb(20 20 20 / 0.5);
-    rotate: 2deg;
+    rotate: 1.5deg;
   }
 
   .hero-portrait :global(img) {
     width: 100%;
     height: 116%;
     object-fit: cover;
-    object-position: 60% 30%;
+    object-position: 40% 35%;
   }
 
   .hero-bottom {
@@ -590,7 +590,7 @@ const journey = [
       position: relative;
       top: auto;
       right: auto;
-      width: 58%;
+      width: 80%;
       justify-self: end;
       margin-block: 1.5rem 2rem;
     }

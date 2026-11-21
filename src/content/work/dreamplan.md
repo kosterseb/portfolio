@@ -12,7 +12,7 @@ featured: true
 order: 1
 ---
 
-Dreamplan is a Danish fintech that makes pension advice understandable: advisory platforms for professionals and digital self-service tools for everyone else. I work across their product as a fullstack engineer, with most of my days spent in the frontend.
+Dreamplan is a Danish fintech that makes pension advice understandable: advisory platforms for professionals and digital self-service tools for everyone else. I started there as an intern during my education and joined full time in October 2026. I work across the product as a fullstack engineer, with most of my days spent in the frontend.
 
 The codebase is a Turborepo monorepo with several Next.js apps sharing the same building blocks, so a big part of my work is the design system: React components documented in Storybook, built once and used everywhere. When a component is right, every product gets better at the same time.
 

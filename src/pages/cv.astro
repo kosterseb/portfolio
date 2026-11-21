@@ -3,89 +3,8 @@ import Base from '../layouts/Base.astro';
 import Arrow from '../components/Arrow.astro';
 import { site } from '../site';
 
-// Edit your CV here. Entries are listed newest first.
-const experience = [
-  {
-    when: '2026 – now',
-    title: 'Fullstack engineer / frontend developer',
-    place: 'Dreamplan.io',
-    where: 'Copenhagen',
-    points: [
-      'Building the frontend of a pension advisory platform and digital self-service tools.',
-      'Working in a Turborepo monorepo of Next.js apps with TypeScript and React.',
-      'Building and maintaining the shared design system and its components in Storybook.',
-    ],
-  },
-  {
-    when: 'Ongoing',
-    title: 'Co-founder, programmer & composer',
-    place: 'Kinda Whimsical Games',
-    where: 'Copenhagen',
-    points: [
-      'Two-person indie studio. I program our games and write their music.',
-      'React Three Fiber, Electron, Expo and SpacetimeDB; our own weather, audio and camera systems.',
-      'Designed and built the studio website in Astro.',
-    ],
-  },
-  {
-    when: 'Before 2025',
-    title: 'Head chef',
-    place: 'Rabarbergaarden på Slottet, Frederiksborg Castle',
-    where: 'Hillerød',
-    points: [
-      'Led the kitchen team, hiring and day-to-day operations.',
-      'Responsible for systems, IT, social media and infrastructure as well as the food.',
-    ],
-  },
-  {
-    when: '2017 – 2019',
-    title: 'Chef de partie',
-    place: 'Restaurant Copenhague Paris',
-    where: 'Paris',
-    points: ['Part of the team that earned two Michelin stars, and competed internationally.'],
-  },
-  {
-    when: 'Ongoing',
-    title: 'Music producer & writer',
-    place: 'Freelance',
-    where: '',
-    points: [
-      'Production, writing and artist work for labels and independent artists.',
-      'Theatre score and sound design for Sartre\'s No Exit (Lukkede Døre).',
-    ],
-  },
-  {
-    when: '2014 – 2015',
-    title: 'Backend / editor assistant, then editor',
-    place: 'Strong Productions',
-    where: 'Copenhagen',
-    points: ['Kept media, editing software and hardware running for the editors, and later edited for a year.'],
-  },
-];
-
-const education = [
-  { when: '2025 – 2026', title: 'Web developer (webudvikler)', place: 'Roskilde Tekniske Skole', note: 'Final project: Landrup Dans, a Next.js web app' },
-  { when: '2016 – 2020', title: 'Chef, gastronomy', place: 'Hotel- og Restaurantskolen', note: '' },
-  { when: '2015', title: 'Classical & jazz', place: 'Copenhagen Music Academy', note: '' },
-  { when: '2011 – 2014', title: 'STX, social science & music', place: 'Gribskov Gymnasium', note: '' },
-];
-
-const certificates = [
-  { when: '2021 – 2023', title: 'Associate Android Developer', place: 'Google' },
-  { when: '2020 – 2022', title: 'Google Cloud certification', place: 'Google' },
-];
-
-const languages = [
-  ['Danish', 'Native'],
-  ['English', 'Fluent'],
-  ['French', 'Basic'],
-];
-
-const skills = [
-  'TypeScript', 'React', 'Next.js', 'Astro', 'Node.js', 'Express', 'MongoDB', 'Firebase', 'SpacetimeDB',
-  'Turborepo', 'Storybook', 'Vitest', 'Git', 'Docker', 'GSAP', 'Three.js', 'React Three Fiber', 'WebGL',
-  'Electron', 'Expo', 'Sass', 'Tailwind', 'Figma',
-];
+import { summary, experience, education, certificates, languages, cvSkills as skills } from '../data/cv';
+// Edit the CV content in src/data/cv.ts (it also feeds the PDF).
 ---
 
 <Base title="CV" description="Experience, education and skills of Sebastian Køster, fullstack engineer and frontend developer.">
@@ -95,10 +14,7 @@ const skills = [
       <h1 class="title" data-split data-split-now>CV</h1>
     </div>
     <div class="intro-side" data-reveal data-reveal-delay="0.3">
-      <p class="lede">
-        Fullstack engineer and frontend developer with a past in Michelin kitchens and music studios. I care about
-        craft, teams and the details people notice without knowing why.
-      </p>
+      <p class="lede">{summary}</p>
       <div class="btn-row">
         <a class="btn" href={site.cv} download>Download PDF <Arrow /></a>
         <a class="btn btn--ghost" href={`mailto:${site.email}`}>Email me</a>
