@@ -129,6 +129,13 @@ a {
   margin-inline: auto;
 }
 
+/* Home page on desktop: keep content clear of the side rails */
+@media (min-width: 901px) {
+  body.has-rails main .wrap {
+    width: min(1440px, 100% - 2 * var(--gap) - 8.5rem);
+  }
+}
+
 /* Small mono label, used for numbers, dates and categories */
 .mono {
   font-family: var(--mono);

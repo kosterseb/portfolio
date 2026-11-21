@@ -11,9 +11,11 @@ interface Props {
   image?: string;
   /** Hide the big contact footer (the contact page has its own). */
   bareFooter?: boolean;
+  /** Home page: side rails instead of the corner tags. */
+  rails?: boolean;
 }
 
-const { title, description = site.description, image, bareFooter = false } = Astro.props;
+const { title, description = site.description, image, bareFooter = false, rails = false } = Astro.props;
 const fullTitle = title ? `${title} | ${site.name}` : `${site.name} | ${site.role}`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 ---
@@ -38,9 +40,9 @@ const canonical = new URL(Astro.url.pathname, Astro.site);
     {image && <meta property="og:image" content={new URL(image, Astro.site)} />}
     <meta name="twitter:card" content="summary_large_image" />
   </head>
-  <body>
+  <body class:list={[{ 'has-rails': rails }]}>
     <PageTransition />
-    <Menu />
+    <Menu rails={rails} />
     <main id="main">
       <slot />
     </main>
