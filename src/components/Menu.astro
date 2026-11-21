@@ -18,30 +18,28 @@ const path = Astro.url.pathname;
 const current = (href: string) => (href === '/' ? path === '/' : path.startsWith(href));
 ---
 
-<header class="site-header">
-  <div class="header-row">
-    <a class="name" href="/" aria-label="Sebastian Køster, home">
-      <span>Sebastian Køster</span>
-      <span class="role">Fullstack engineer</span>
-    </a>
-    <button type="button" data-menu-toggle class="menu-button" aria-expanded="false" aria-controls="site-menu">
-      <span class="menu-button-text" aria-hidden="true">
-        <span>Menu</span>
-        <span>Close</span>
-      </span>
-      <span class="visually-hidden">Open menu</span>
-      <span class="icon-wrap" aria-hidden="true">
-        <svg viewBox="0 0 16 16" fill="none" class="menu-button-icon">
-          <path d="M7.33333 16L7.33333 -3.2055e-07L8.66667 -3.78832e-07L8.66667 16L7.33333 16Z" fill="currentColor"></path>
-          <path d="M16 8.66667L-2.62269e-07 8.66667L-3.78832e-07 7.33333L16 7.33333L16 8.66667Z" fill="currentColor"></path>
-          <path d="M6 7.33333L7.33333 7.33333L7.33333 6C7.33333 6.73637 6.73638 7.33333 6 7.33333Z" fill="currentColor"></path>
-          <path d="M10 7.33333L8.66667 7.33333L8.66667 6C8.66667 6.73638 9.26362 7.33333 10 7.33333Z" fill="currentColor"></path>
-          <path d="M6 8.66667L7.33333 8.66667L7.33333 10C7.33333 9.26362 6.73638 8.66667 6 8.66667Z" fill="currentColor"></path>
-          <path d="M10 8.66667L8.66667 8.66667L8.66667 10C8.66667 9.26362 9.26362 8.66667 10 8.66667Z" fill="currentColor"></path>
-        </svg>
-      </span>
-    </button>
-  </div>
+<header class="site-header" data-header>
+  <a class="tag name" href="/" aria-label="Sebastian Køster, home">
+    <span class="name-top"><span class="dot" aria-hidden="true"></span>Sebastian Køster</span>
+    <span class="role">Fullstack engineer, Copenhagen</span>
+  </a>
+  <button type="button" data-menu-toggle class="tag menu-button" aria-expanded="false" aria-controls="site-menu">
+    <span class="menu-button-text" aria-hidden="true">
+      <span>Menu</span>
+      <span>Close</span>
+    </span>
+    <span class="visually-hidden">Open menu</span>
+    <span class="icon-wrap" aria-hidden="true">
+      <svg viewBox="0 0 16 16" fill="none" class="menu-button-icon">
+        <path d="M7.33333 16L7.33333 -3.2055e-07L8.66667 -3.78832e-07L8.66667 16L7.33333 16Z" fill="currentColor"></path>
+        <path d="M16 8.66667L-2.62269e-07 8.66667L-3.78832e-07 7.33333L16 7.33333L16 8.66667Z" fill="currentColor"></path>
+        <path d="M6 7.33333L7.33333 7.33333L7.33333 6C7.33333 6.73637 6.73638 7.33333 6 7.33333Z" fill="currentColor"></path>
+        <path d="M10 7.33333L8.66667 7.33333L8.66667 6C8.66667 6.73638 9.26362 7.33333 10 7.33333Z" fill="currentColor"></path>
+        <path d="M6 8.66667L7.33333 8.66667L7.33333 10C7.33333 9.26362 6.73638 8.66667 6 8.66667Z" fill="currentColor"></path>
+        <path d="M10 8.66667L8.66667 8.66667L8.66667 10C8.66667 9.26362 9.26362 8.66667 10 8.66667Z" fill="currentColor"></path>
+      </svg>
+    </span>
+  </button>
 </header>
 
 <div data-nav="closed" class="nav" id="site-menu">
@@ -88,67 +86,86 @@ const current = (href: string) => (href === '/' ? path === '/' : path.startsWith
 </div>
 
 <style>
-  /* A floating bar that holds the name and the menu button together */
+  /* Two solid tags pinned in the corners; the page stays visible between them */
   .site-header {
     position: fixed;
     top: 0.75rem;
     left: 0.75rem;
     right: 0.75rem;
     z-index: 250;
-    pointer-events: none;
-  }
-
-  .header-row {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    gap: 1rem;
-    width: min(1440px, 100%);
-    margin-inline: auto;
-    padding: 0.45rem 0.45rem 0.45rem 1rem;
-    border-radius: 999px;
-    background: rgb(242 240 236 / 0.72);
-    border: 1px solid rgb(20 20 20 / 0.08);
-    box-shadow: 0 10px 30px -18px rgb(20 20 20 / 0.45);
-    backdrop-filter: blur(14px) saturate(1.2);
-    -webkit-backdrop-filter: blur(14px) saturate(1.2);
+    align-items: flex-start;
+    pointer-events: none;
+    transition: transform 0.6s var(--ease);
+  }
+
+  /* Scrolling down tucks the tags away, scrolling up brings them back */
+  .site-header.is-tucked {
+    transform: translateY(calc(-100% - 1rem));
+  }
+
+  .tag {
     pointer-events: auto;
-    transition:
-      background 0.4s,
-      box-shadow 0.4s;
+    display: grid;
+    background: var(--ink);
+    color: var(--paper-2);
+    border: 0;
+    border-radius: 0.6rem;
+    box-shadow: 0 12px 28px -16px rgb(0 0 0 / 0.55);
+    text-decoration: none;
   }
 
   .name {
+    gap: 0.3rem;
+    padding: 0.7rem 1rem 0.65rem 0.9rem;
+  }
+
+  .name-top {
     display: flex;
-    align-items: baseline;
-    gap: 0.6rem;
-    color: var(--ink);
-    text-decoration: none;
-    font-weight: 650;
-    font-stretch: 90%;
-    font-size: 1rem;
-    line-height: 1;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 800;
+    font-stretch: 68%;
+    font-size: 1.35rem;
+    line-height: 0.85;
+    letter-spacing: 0.005em;
+    text-transform: uppercase;
+  }
+
+  .dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background: var(--green);
+    transition: transform 0.4s var(--ease-out);
+  }
+
+  .name:hover .dot {
+    transform: scale(1.5);
   }
 
   .role {
+    padding-left: 1rem;
     font-family: var(--mono);
-    font-size: 0.7rem;
-    font-weight: 400;
-    color: var(--ink-2);
+    font-size: 0.66rem;
+    line-height: 1.2;
+    color: rgb(242 240 236 / 0.6);
   }
 
   .menu-button {
-    display: flex;
+    grid-auto-flow: column;
     align-items: center;
-    gap: 0.6em;
-    padding: 0.65em 1.05em 0.65em 1.2em;
-    background: var(--ink);
-    border: 0;
-    border-radius: 999px;
-    color: var(--paper-2);
-    font: 550 0.95rem / 1 var(--font);
+    gap: 0.6rem;
+    min-height: 3.35rem;
+    padding: 0 1.05rem 0 1.15rem;
+    font: 800 1.35rem / 1 var(--font);
+    font-stretch: 68%;
+    text-transform: uppercase;
     cursor: pointer;
-    transition: background 0.3s, color 0.3s;
+    transition:
+      background 0.3s,
+      color 0.3s;
   }
 
   .menu-button:hover,
@@ -161,14 +178,14 @@ const current = (href: string) => (href === '/' ? path === '/' : path.startsWith
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    height: 1.1em;
+    height: 0.9em;
     overflow: hidden;
-    line-height: 1.1;
+    line-height: 0.9;
   }
 
   .menu-button-icon {
-    width: 0.9em;
-    height: 0.9em;
+    width: 0.8em;
+    height: 0.8em;
   }
 
   .icon-wrap {
@@ -183,8 +200,13 @@ const current = (href: string) => (href === '/' ? path === '/' : path.startsWith
   }
 
   @media (max-width: 520px) {
-    .role {
-      display: none;
+    .name-top,
+    .menu-button {
+      font-size: 1.15rem;
+    }
+
+    .menu-button {
+      min-height: 3rem;
     }
   }
 
@@ -208,8 +230,8 @@ const current = (href: string) => (href === '/' ? path === '/' : path.startsWith
     position: relative;
     width: 35em;
     max-width: calc(100% - 1.5rem);
-    height: calc(100% - 5.25rem);
-    margin: 4.5rem 0.75rem 0.75rem auto;
+    height: calc(100% - 5.5rem);
+    margin: 4.75rem 0.75rem 0.75rem auto;
     padding: calc(1.25 * var(--menu-padding)) 0 var(--menu-padding);
     border-radius: var(--radius);
     overflow: hidden auto;
@@ -424,4 +446,28 @@ const current = (href: string) => (href === '/' ? path === '/' : path.startsWith
   }
 
   initMenu();
+
+  // Tuck the corner tags away while scrolling down, bring them back on the way up
+  const header = document.querySelector<HTMLElement>('[data-header]');
+  const nav = document.querySelector<HTMLElement>('.nav');
+  let lastY = scrollY;
+  let ticking = false;
+  addEventListener(
+    'scroll',
+    () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const y = scrollY;
+        const down = y > lastY + 4;
+        const up = y < lastY - 4;
+        if (nav?.dataset.nav === 'open' || y < 120 || up) header?.classList.remove('is-tucked');
+        else if (down) header?.classList.add('is-tucked');
+        if (down || up) lastY = y;
+        ticking = false;
+      });
+    },
+    { passive: true },
+  );
+  header?.addEventListener('focusin', () => header.classList.remove('is-tucked'));
 </script>
